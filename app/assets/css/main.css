@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+/* ─── Tema de Marca — Quintal dos Mineiros ─── */
+/* Variáveis de cor, tipografia e utilitários personalizados */
+@theme {
+  /* Paleta principal */
+  --color-primary:       #DE8402;
+  --color-primary-dark:  #C47502;
+  --color-secondary:     #B95B27;
+  --color-forest:        #2F5946;
+  --color-wine:          #962D20;
+
+  /* Neutros quentes */
+  --color-cream:         #E6CDA1;
+  --color-cream-light:   #FAF6EE;
+  --color-cream-warm:    #F5EDD8;
+  --color-warm-dark:     #2C1810;
+  --color-warm-medium:   #3D2B1F;
+  --color-warm-muted:    #7A6355;
+
+  /* Tipografia da marca */
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:    'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ─── Reset Global ─── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAF6EE;
+  color: #2C1810;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Overlay do Hero ─── */
+/* Gradiente atmosférico sobre a imagem de fundo */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(44, 24, 16, 0.65) 0%,
+    rgba(218, 144, 43, 0.12) 55%,
+    rgba(44, 24, 16, 0.50) 100%
+  );
+}
+
+/* ─── Efeito Hover de Cartão Premium ─── */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 48px rgba(44, 24, 16, 0.14);
+}
+
+/* ─── Separador Dourado Decorativo ─── */
+.separator-gold {
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #DE8402, transparent);
+}
+
+/* ─── Sombra no Texto do Hero ─── */
+.text-hero-shadow {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+}
+
+/* ─── Fundo em Degradê Creme ─── */
+.bg-cream-gradient {
+  background: linear-gradient(135deg, #FAF6EE 0%, #F5EDD8 100%);
+}
+
+/* ─── Scrollbar Personalizada (navegadores WebKit) ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #FAF6EE; }
+::-webkit-scrollbar-thumb { background: #E6CDA1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #DE8402; }
