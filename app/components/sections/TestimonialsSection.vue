@@ -9,7 +9,7 @@ const { testimonials } = useTestimonials()
 
 <template>
   <!-- Seção de depoimentos — fundo creme quente -->
-  <section id="depoimentos" class="bg-[#F5EDD8] py-24 md:py-32">
+  <section id="depoimentos" class="bg-[#F3EBDD] py-24 md:py-32">
     <div class="max-w-7xl mx-auto px-5 md:px-8">
 
       <!-- ─── Cabeçalho da Seção ─── -->
@@ -39,7 +39,7 @@ const { testimonials } = useTestimonials()
           <span
             v-for="i in 5"
             :key="i"
-            class="text-[#DE8402] text-2xl"
+            class="text-[#2F5946] text-2xl"
             aria-hidden="true"
           >★</span>
         </div>

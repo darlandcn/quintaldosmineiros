@@ -18,15 +18,14 @@ const emit = defineEmits<{ click: [] }>()
   <button
     @click="emit('click')"
     :class="[
-      'inline-flex items-center gap-2 px-5 py-2.5 rounded-full',
-      'font-body text-sm font-medium transition-all duration-200 cursor-pointer',
-      'border focus:outline-none focus:ring-2 focus:ring-[#DE8402]/30',
+      'inline-flex items-center gap-2 px-5 py-2.5',
+      'font-subheadline text-xs font-semibold tracking-[0.15em] uppercase transition-all duration-300 cursor-pointer',
+      'border focus:outline-none',
       active
-        ? 'bg-[#DE8402] text-white border-[#DE8402] shadow-sm'
-        : 'bg-white text-[#7A6355] border-[#E6CDA1] hover:border-[#DE8402] hover:text-[#DE8402]',
+        ? 'bg-[#2F5946] text-white border-[#2F5946]'
+        : 'bg-transparent text-[#2F5946] border-[#2F5946] hover:bg-[#2F5946] hover:text-white',
     ]"
   >
-    <span v-if="icon" aria-hidden="true">{{ icon }}</span>
     {{ label }}
   </button>
 </template>

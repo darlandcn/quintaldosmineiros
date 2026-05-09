@@ -4,23 +4,27 @@
 /* Variáveis de cor, tipografia e utilitários personalizados */
 @theme {
   /* Paleta principal */
-  --color-primary:       #DE8402;
-  --color-primary-dark:  #C47502;
-  --color-secondary:     #B95B27;
-  --color-forest:        #2F5946;
-  --color-wine:          #962D20;
+  --color-primary:       #2F5946;
+  --color-primary-dark:  #254637;
+  --color-secondary:     #3F6B56;
+
+  /* Acentos */
+  --color-accent:        #D88A1C;
+  --color-wine:          #8C3B2A;
 
   /* Neutros quentes */
-  --color-cream:         #E6CDA1;
+  --color-cream:         #E7D7BC;
   --color-cream-light:   #FAF6EE;
-  --color-cream-warm:    #F5EDD8;
+  --color-cream-warm:    #F3EBDD;
   --color-warm-dark:     #2C1810;
   --color-warm-medium:   #3D2B1F;
   --color-warm-muted:    #7A6355;
 
   /* Tipografia da marca */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body:    'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-display:      'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body:         'Manrope', 'Helvetica Neue', Arial, sans-serif;
+  --font-editorial:    'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-subheadline:  'Manrope', 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* ─── Reset Global ─── */
@@ -35,7 +39,7 @@ html {
 body {
   background-color: #FAF6EE;
   color: #2C1810;
-  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Manrope', 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -63,7 +67,7 @@ body {
 /* ─── Separador Dourado Decorativo ─── */
 .separator-gold {
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, #DE8402, transparent);
+  background: linear-gradient(90deg, transparent, #D88A1C, transparent);
 }
 
 /* ─── Sombra no Texto do Hero ─── */
@@ -73,11 +77,11 @@ body {
 
 /* ─── Fundo em Degradê Creme ─── */
 .bg-cream-gradient {
-  background: linear-gradient(135deg, #FAF6EE 0%, #F5EDD8 100%);
+  background: linear-gradient(135deg, #FAF6EE 0%, #F3EBDD 100%);
 }
 
 /* ─── Scrollbar Personalizada (navegadores WebKit) ─── */
-::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #FAF6EE; }
-::-webkit-scrollbar-thumb { background: #E6CDA1; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #DE8402; }
+::-webkit-scrollbar-thumb { background: #C8B89A; border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: #2F5946; }

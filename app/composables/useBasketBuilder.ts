@@ -20,11 +20,12 @@ export interface BuilderCategory {
 export function useBasketBuilder() {
   // ─── Categorias do Montador ───
   const builderCategories: BuilderCategory[] = [
-    { id: 'queijos',   label: 'Queijos',    icon: '🧀' },
+    { id: 'queijos',   label: 'Queijos',      icon: '🧀' },
     { id: 'doces',     label: 'Doces & Mel', icon: '🍯' },
-    { id: 'cafe',      label: 'Café',        icon: '☕' },
-    { id: 'biscoitos', label: 'Biscoitos',   icon: '🍪' },
-    { id: 'gourmet',   label: 'Seleções',    icon: '🫒' },
+    { id: 'cafe',      label: 'Café',         icon: '☕' },
+    { id: 'biscoitos', label: 'Biscoitos',    icon: '🍪' },
+    { id: 'geleias',   label: 'Geleias',      icon: '🫙' },
+    { id: 'paes',      label: 'Pães & Roscas', icon: '🍞' },
   ]
 
   // ─── Itens Disponíveis para a Cesta ───
@@ -43,10 +44,15 @@ export function useBasketBuilder() {
     // Biscoitos
     { id: 9,  name: 'Biscoito de Polvilho', description: 'Assado, crocante, pacote 100g',              icon: '🍪', category: 'biscoitos', price: 16, priceDisplay: '+R$ 16' },
     { id: 10, name: 'Biscoito Amanteigado', description: 'Artesanal, pacote 150g',                     icon: '🍪', category: 'biscoitos', price: 18, priceDisplay: '+R$ 18' },
-    // Seleções Gourmet
-    { id: 11, name: 'Torresmo Artesanal',   description: 'Crocante e temperado, 100g',                 icon: '🥩', category: 'gourmet',   price: 28, priceDisplay: '+R$ 28' },
-    { id: 12, name: 'Geleia de Jabuticaba', description: 'Artesanal, pote 200g',                       icon: '🫙', category: 'gourmet',   price: 24, priceDisplay: '+R$ 24' },
-    { id: 13, name: 'Antipasti Mineiro',    description: 'Mix gourmet curado, 150g',                   icon: '🫒', category: 'gourmet',   price: 32, priceDisplay: '+R$ 32' },
+    // Geleias
+    { id: 11, name: 'Geleia de Jabuticaba', description: 'Artesanal, cor intensa, pote 200g',          icon: '🫙', category: 'geleias',   price: 24, priceDisplay: '+R$ 24' },
+    { id: 12, name: 'Geleia de Pimenta',    description: 'Agridoce, combina com queijos, pote 200g',   icon: '🫙', category: 'geleias',   price: 22, priceDisplay: '+R$ 22' },
+    { id: 13, name: 'Geleia de Laranja',    description: 'Cítrica e perfumada, pote 200g',             icon: '🫙', category: 'geleias',   price: 20, priceDisplay: '+R$ 20' },
+    { id: 14, name: 'Marmelada Artesanal',  description: 'Firme e adocicada, bloco 250g',              icon: '🫙', category: 'geleias',   price: 22, priceDisplay: '+R$ 22' },
+    // Pães & Roscas
+    { id: 15, name: 'Broa de Milho',        description: 'Forno de pedra, receita mineira, 300g',      icon: '🌽', category: 'paes',      price: 18, priceDisplay: '+R$ 18' },
+    { id: 16, name: 'Pão de Queijo',        description: 'Polvilho e queijo Canastra, pacote 200g',    icon: '🧀', category: 'paes',      price: 22, priceDisplay: '+R$ 22' },
+    { id: 17, name: 'Rosca de Polvilho',    description: 'Crocante e levinha, receita tradicional, 150g', icon: '🍩', category: 'paes',  price: 16, priceDisplay: '+R$ 16' },
   ]
 
   // ─── Preço Base da Cesta (embalagem + fita + cartão) ───

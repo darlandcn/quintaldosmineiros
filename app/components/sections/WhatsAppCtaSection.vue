@@ -22,12 +22,12 @@ const whatsappUrl = 'https://wa.me/5531999999999?text=Olá! Gostaria de fazer me
     <!-- ─── Decoração de Fundo: círculos suaves ─── -->
     <div
       class="absolute top-0 left-1/4 w-96 h-96 rounded-full
-             bg-[#DE8402]/10 blur-3xl -translate-y-1/2"
+             bg-[#2F5946]/10 blur-3xl -translate-y-1/2"
       aria-hidden="true"
     />
     <div
       class="absolute bottom-0 right-1/4 w-72 h-72 rounded-full
-             bg-[#B95B27]/15 blur-3xl translate-y-1/2"
+             bg-[#3F6B56]/15 blur-3xl translate-y-1/2"
       aria-hidden="true"
     />
 
@@ -35,11 +35,11 @@ const whatsappUrl = 'https://wa.me/5531999999999?text=Olá! Gostaria de fazer me
 
       <!-- ─── Eyebrow ─── -->
       <div class="flex items-center justify-center gap-3 mb-7">
-        <div class="h-px w-8 bg-[#DE8402]/60" aria-hidden="true" />
-        <span class="font-body text-xs font-semibold tracking-[0.2em] uppercase text-[#DE8402]">
+        <div class="h-px w-8 bg-[#2F5946]/60" aria-hidden="true" />
+        <span class="font-body text-xs font-semibold tracking-[0.2em] uppercase text-[#2F5946]">
           Atendimento Personalizado
         </span>
-        <div class="h-px w-8 bg-[#DE8402]/60" aria-hidden="true" />
+        <div class="h-px w-8 bg-[#2F5946]/60" aria-hidden="true" />
       </div>
 
       <!-- ─── Título Principal do CTA ─── -->
@@ -47,7 +47,7 @@ const whatsappUrl = 'https://wa.me/5531999999999?text=Olá! Gostaria de fazer me
         <span class="block text-3xl md:text-4xl lg:text-5xl">
           Pronto para provar
         </span>
-        <span class="block text-4xl md:text-5xl lg:text-6xl italic text-[#DE8402] mt-1">
+        <span class="block text-4xl md:text-5xl lg:text-6xl italic text-[#2F5946] mt-1">
           o sabor de Minas?
         </span>
       </h2>

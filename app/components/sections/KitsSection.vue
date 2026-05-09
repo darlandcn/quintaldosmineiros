@@ -9,7 +9,7 @@ const { baskets } = useBaskets()
 
 <template>
   <!-- Seção de cestas — fundo creme claro para leveza visual -->
-  <section id="kits" class="bg-[#FAF6EE] py-24 md:py-32">
+  <section id="kits" class="bg-[#FAF6EE] py-14 md:py-20">
     <div class="max-w-7xl mx-auto px-5 md:px-8">
 
       <!-- ─── Cabeçalho da Seção ─── -->
@@ -41,11 +41,12 @@ const { baskets } = useBaskets()
         </p>
         <a
           href="#monte"
-          class="inline-flex items-center gap-2 border-2 border-[#DE8402] text-[#DE8402]
-                 px-8 py-3.5 rounded-full font-body font-semibold text-base
-                 hover:bg-[#DE8402] hover:text-white transition-all duration-300"
+          class="inline-flex items-center justify-center px-8 py-3.5
+                 border border-[#2F5946] text-[#2F5946] hover:bg-[#2F5946] hover:text-white
+                 font-subheadline text-xs font-semibold tracking-[0.15em] uppercase
+                 transition-all duration-300"
         >
-          Montar Minha Cesta →
+          Montar Minha Cesta
         </a>
       </div>
     </div>

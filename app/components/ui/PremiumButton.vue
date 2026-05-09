@@ -20,9 +20,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 // ─── Mapeamento de Estilos por Variante ───
 const variantClasses: Record<NonNullable<Props['variant']>, string> = {
-  primary:  'bg-[#DE8402] text-white hover:bg-[#C47502] shadow-sm hover:shadow-md',
-  outline:  'border-2 border-[#DE8402] text-[#DE8402] hover:bg-[#DE8402] hover:text-white',
-  ghost:    'text-[#DE8402] hover:bg-[#DE8402]/10',
+  primary:  'bg-[#2F5946] text-white hover:bg-[#254637] shadow-sm hover:shadow-md',
+  outline:  'border-2 border-[#2F5946] text-[#2F5946] hover:bg-[#2F5946] hover:text-white',
+  ghost:    'text-[#2F5946] hover:bg-[#2F5946]/10',
   dark:     'bg-[#2C1810] text-white hover:bg-[#3D2B1F] shadow-sm hover:shadow-md',
   whatsapp: 'bg-[#25D366] text-white hover:bg-[#22c55e] shadow-sm hover:shadow-md',
 }
@@ -47,7 +47,7 @@ const sizeClasses: Record<NonNullable<Props['size']>, string> = {
       'inline-flex items-center justify-center',
       'font-body font-semibold tracking-wide rounded-full',
       'transition-all duration-300 ease-out cursor-pointer',
-      'select-none focus:outline-none focus:ring-2 focus:ring-[#DE8402]/40',
+      'select-none focus:outline-none focus:ring-2 focus:ring-[#2F5946]/40',
       'disabled:opacity-50 disabled:cursor-not-allowed',
       variantClasses[variant],
       sizeClasses[size],

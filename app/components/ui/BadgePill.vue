@@ -11,10 +11,10 @@ const props = withDefaults(defineProps<Props>(), { color: 'primary' })
 
 // ─── Mapeamento de Cores ───
 const colorMap: Record<NonNullable<Props['color']>, string> = {
-  primary: 'bg-[#DE8402]/15 text-[#B95B27]',
+  primary: 'bg-[#2F5946]/15 text-[#3F6B56]',
   forest:  'bg-[#2F5946]/15 text-[#2F5946]',
-  wine:    'bg-[#962D20]/15 text-[#962D20]',
-  neutral: 'bg-[#E6CDA1]/50 text-[#7A6355]',
+  wine:    'bg-[#8C3B2A]/15 text-[#8C3B2A]',
+  neutral: 'bg-[#E7D7BC]/50 text-[#7A6355]',
   white:   'bg-white/20 text-white backdrop-blur-sm',
 }
 </script>

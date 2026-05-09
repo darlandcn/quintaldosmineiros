@@ -44,7 +44,7 @@ const whatsappNumber = '5531999999999'
         aria-modal="true"
       >
         <!-- ─── Cabeçalho do Drawer ─── -->
-        <div class="flex items-center justify-between px-6 py-5 border-b border-[#E6CDA1]/60">
+        <div class="flex items-center justify-between px-6 py-5 border-b border-[#E7D7BC]/60">
           <div class="flex items-center gap-3">
             <span class="text-2xl" aria-hidden="true">🧺</span>
             <div>
@@ -59,7 +59,7 @@ const whatsappNumber = '5531999999999'
 
           <button
             @click="isOpen = false"
-            class="p-2 rounded-full hover:bg-[#F5EDD8] transition-colors text-[#7A6355] hover:text-[#2C1810]"
+            class="p-2 rounded-full hover:bg-[#F3EBDD] transition-colors text-[#7A6355] hover:text-[#2C1810]"
             aria-label="Fechar cesta"
           >
             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -82,7 +82,7 @@ const whatsappNumber = '5531999999999'
             </p>
             <button
               @click="isOpen = false"
-              class="font-body text-sm font-semibold text-[#DE8402] hover:underline"
+              class="font-body text-sm font-semibold text-[#2F5946] hover:underline"
             >
               Ver produtos →
             </button>
@@ -97,7 +97,7 @@ const whatsappNumber = '5531999999999'
             leave-active-class="transition-all duration-150 ease-in"
             leave-from-class="opacity-100"
             leave-to-class="opacity-0 translate-x-4"
-            class="flex flex-col divide-y divide-[#E6CDA1]/40"
+            class="flex flex-col divide-y divide-[#E7D7BC]/40"
           >
             <li
               v-for="item in items"
@@ -105,7 +105,7 @@ const whatsappNumber = '5531999999999'
               class="py-4 flex items-center gap-4"
             >
               <!-- Miniatura ou ícone -->
-              <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-[#F5EDD8] flex items-center justify-center">
+              <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-[#F3EBDD] flex items-center justify-center">
                 <img
                   v-if="item.image"
                   :src="item.image"
@@ -120,7 +120,7 @@ const whatsappNumber = '5531999999999'
                 <p class="font-body text-sm font-semibold text-[#2C1810] truncate">
                   {{ item.name }}
                 </p>
-                <p class="font-body text-xs text-[#DE8402] font-semibold mt-0.5">
+                <p class="font-body text-xs text-[#2F5946] font-semibold mt-0.5">
                   {{ item.priceDisplay }}
                 </p>
               </div>
@@ -129,8 +129,8 @@ const whatsappNumber = '5531999999999'
               <div class="flex items-center gap-2 flex-shrink-0">
                 <button
                   @click="decrementItem(item.id)"
-                  class="w-7 h-7 rounded-full border border-[#E6CDA1] flex items-center justify-center
-                         text-[#7A6355] hover:border-[#DE8402] hover:text-[#DE8402] transition-colors"
+                  class="w-7 h-7 rounded-full border border-[#E7D7BC] flex items-center justify-center
+                         text-[#7A6355] hover:border-[#2F5946] hover:text-[#2F5946] transition-colors"
                   :aria-label="`Remover um ${item.name}`"
                 >
                   <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -144,8 +144,8 @@ const whatsappNumber = '5531999999999'
 
                 <button
                   @click="addItem({ id: item.id, name: item.name, price: item.price, priceDisplay: item.priceDisplay, image: item.image, icon: item.icon })"
-                  class="w-7 h-7 rounded-full border border-[#E6CDA1] flex items-center justify-center
-                         text-[#7A6355] hover:border-[#DE8402] hover:text-[#DE8402] transition-colors"
+                  class="w-7 h-7 rounded-full border border-[#E7D7BC] flex items-center justify-center
+                         text-[#7A6355] hover:border-[#2F5946] hover:text-[#2F5946] transition-colors"
                   :aria-label="`Adicionar mais ${item.name}`"
                 >
                   <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -160,12 +160,12 @@ const whatsappNumber = '5531999999999'
         <!-- ─── Rodapé com Total e CTA ─── -->
         <div
           v-if="items.length > 0"
-          class="px-6 py-5 border-t border-[#E6CDA1]/60 bg-[#FAF6EE]"
+          class="px-6 py-5 border-t border-[#E7D7BC]/60 bg-[#FAF6EE]"
         >
           <!-- Total -->
           <div class="flex items-center justify-between mb-5">
             <span class="font-body text-sm font-semibold text-[#2C1810]">Total estimado</span>
-            <span class="font-display font-bold text-2xl text-[#DE8402]">
+            <span class="font-display font-bold text-2xl text-[#2F5946]">
               {{ totalPriceDisplay }}
             </span>
           </div>
@@ -176,7 +176,7 @@ const whatsappNumber = '5531999999999'
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center justify-center gap-2.5 w-full
-                   bg-[#DE8402] hover:bg-[#C47502] text-white
+                   bg-[#2F5946] hover:bg-[#254637] text-white
                    px-6 py-4 rounded-2xl font-body font-semibold text-base
                    transition-all duration-300 shadow-md hover:shadow-lg"
           >

@@ -19,12 +19,11 @@ const emit = defineEmits<{ toggle: [id: number] }>()
   <button
     @click="emit('toggle', item.id)"
     :class="[
-      'relative w-full text-left rounded-xl p-4',
-      'border-2 transition-all duration-200 cursor-pointer',
-      'focus:outline-none focus:ring-2 focus:ring-[#DE8402]/40',
+      'relative w-full text-left p-4',
+      'border transition-all duration-200 cursor-pointer focus:outline-none',
       selected
-        ? 'border-[#DE8402] bg-[#DE8402]/5 shadow-md'
-        : 'border-[#E6CDA1]/60 bg-white hover:border-[#DE8402]/50 hover:bg-[#FAF6EE]',
+        ? 'border-[#2F5946] bg-[#2F5946]/5 shadow-md'
+        : 'border-[#2F5946]/50 bg-white hover:border-[#2F5946] hover:bg-[#FAF6EE]',
     ]"
     :aria-pressed="selected"
   >
@@ -36,7 +35,7 @@ const emit = defineEmits<{ toggle: [id: number] }>()
     >
       <div
         v-if="selected"
-        class="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-[#DE8402]
+        class="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-[#2F5946]
                flex items-center justify-center shadow-sm"
         aria-hidden="true"
       >
@@ -61,7 +60,7 @@ const emit = defineEmits<{ toggle: [id: number] }>()
     </p>
 
     <!-- Preço incremental do item -->
-    <p class="font-display text-sm font-bold text-[#DE8402] mt-2">
+    <p class="font-display text-sm font-bold text-[#2F5946] mt-2">
       {{ item.priceDisplay }}
     </p>
   </button>

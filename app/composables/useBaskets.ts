@@ -28,8 +28,7 @@ export function useBaskets() {
       description:
         'A experiência completa de Minas Gerais em uma cesta. Queijo artesanal, doce de leite, biscoitos de polvilho, café especial e os sabores que definem Minas.',
       price: 'R$ 189,90',
-      image:
-        'https://images.unsplash.com/photo-1607344645866-009c320b63e0?auto=format&fit=crop&w=800&q=80',
+      image: '/images/kit_minas.png',
       items: [
         { name: 'Queijo Canastra', icon: '🧀' },
         { name: 'Doce de Leite', icon: '🍯' },

@@ -28,7 +28,7 @@ const whatsappNumber = '5531999999999'
 
 <template>
   <!-- Seção do montador — fundo creme claro para leveza -->
-  <section id="monte" class="bg-[#FAF6EE] py-24 md:py-32">
+  <section id="monte" class="bg-[#FAF6EE] py-14 md:py-20">
     <div class="max-w-7xl mx-auto px-5 md:px-8">
 
       <!-- ─── Cabeçalho da Seção ─── -->
@@ -36,9 +36,12 @@ const whatsappNumber = '5531999999999'
         <SectionHeader
           eyebrow="Personalização Premium"
           title="Monte a sua cesta<br /><em>do seu jeito</em>"
-          subtitle="Escolha cada item com cuidado. Nós montamos, embalamos com carinho e entregamos para quem você ama."
           align="center"
         />
+        <p class="font-body text-base md:text-lg text-[#7A6355] leading-relaxed mt-4 text-center">
+          Escolha cada item com cuidado.<br />
+          Nós montamos, embalamos com carinho e entregamos.
+        </p>
       </div>
 
       <!-- ─── Layout Principal do Montador ─── -->
@@ -48,20 +51,20 @@ const whatsappNumber = '5531999999999'
         <div class="lg:col-span-2">
 
           <!-- Abas de categorias do montador -->
-          <div class="flex flex-wrap gap-2 mb-7">
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-7">
             <button
               v-for="cat in builderCategories"
               :key="cat.id"
               @click="activeCategory = cat.id"
               :class="[
-                'flex items-center gap-2 px-5 py-2.5 rounded-full font-body text-sm font-medium',
-                'transition-all duration-200 cursor-pointer border focus:outline-none',
+                'inline-flex items-center justify-center gap-2 w-full py-2.5',
+                'font-subheadline text-xs font-semibold tracking-[0.15em] uppercase transition-all duration-300 cursor-pointer',
+                'border focus:outline-none',
                 activeCategory === cat.id
-                  ? 'bg-[#DE8402] text-white border-[#DE8402] shadow-sm'
-                  : 'bg-white text-[#7A6355] border-[#E6CDA1] hover:border-[#DE8402] hover:text-[#DE8402]',
+                  ? 'bg-[#2F5946] text-white border-[#2F5946]'
+                  : 'bg-transparent text-[#2F5946] border-[#2F5946] hover:bg-[#2F5946] hover:text-white',
               ]"
             >
-              <span aria-hidden="true">{{ cat.icon }}</span>
               {{ cat.label }}
             </button>
           </div>
@@ -94,7 +97,7 @@ const whatsappNumber = '5531999999999'
         <!-- ─── Painel de Resumo da Cesta (1/3 da largura) ─── -->
         <!-- Posição sticky no desktop para acompanhar o scroll -->
         <aside class="lg:sticky lg:top-28">
-          <div class="bg-white rounded-3xl p-7 border border-[#E6CDA1]/50 shadow-md">
+          <div class="bg-white p-7 border border-[#2F5946]/50 shadow-xl shadow-[#2F5946]/10">
 
             <!-- Título do resumo -->
             <div class="flex items-center gap-3 mb-6">
@@ -148,7 +151,7 @@ const whatsappNumber = '5531999999999'
                     </span>
                   </div>
                   <!-- Preço do item -->
-                  <span class="font-body text-xs font-semibold text-[#DE8402] flex-shrink-0">
+                  <span class="font-body text-xs font-semibold text-[#2F5946] flex-shrink-0">
                     {{ builderItems.find(i => i.id === itemId)?.priceDisplay }}
                   </span>
                 </li>
@@ -160,14 +163,14 @@ const whatsappNumber = '5531999999999'
 
             <!-- Preço base da cesta (embalagem) -->
             <div class="flex justify-between text-xs font-body text-[#7A6355] mb-2">
-              <span>Cesta + embalagem + fita</span>
+              <span>Custo de produção</span>
               <span>R$ 39,90</span>
             </div>
 
             <!-- Total calculado em destaque -->
             <div class="flex justify-between items-end">
               <span class="font-body text-sm font-semibold text-[#2C1810]">Total estimado</span>
-              <span class="font-display font-bold text-2xl text-[#DE8402]">
+              <span class="font-display font-bold text-2xl text-[#2F5946]">
                 {{ totalPriceDisplay }}
               </span>
             </div>
@@ -177,10 +180,10 @@ const whatsappNumber = '5531999999999'
               :href="`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex items-center justify-center gap-2.5 mt-6
-                     bg-[#DE8402] text-white px-6 py-4 rounded-2xl w-full
-                     font-body font-semibold text-base
-                     hover:bg-[#C47502] transition-all duration-300 shadow-md hover:shadow-lg"
+              class="inline-flex items-center justify-center gap-2.5 mt-6 w-full px-6 py-3.5
+                     bg-[#2F5946] hover:bg-[#254637] text-white
+                     font-subheadline text-xs font-semibold tracking-[0.15em] uppercase
+                     transition-all duration-300"
             >
               <!-- Ícone WhatsApp -->
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -191,7 +194,7 @@ const whatsappNumber = '5531999999999'
 
             <!-- Nota tranquilizadora -->
             <p class="font-body text-xs text-[#7A6355] text-center mt-3 leading-relaxed">
-              Valores estimados. Confirmação e pagamento via WhatsApp.
+              Confirmação e pagamento via WhatsApp.
             </p>
           </div>
         </aside>

@@ -10,6 +10,7 @@ export interface Product {
   badge?: string
   category: string
   origin?: string
+  characteristics?: string[]
 }
 
 export interface Category {
@@ -43,6 +44,14 @@ export function useProducts() {
       badge: 'Favorito',
       category: 'queijos',
       origin: 'Serra da Canastra, MG',
+      characteristics: [
+        '🧀 Queijo Canastra artesanal',
+        '⏳ Meia cura',
+        '🟡 Casca amarela',
+        '⚪ Massa branca',
+        '🧂 Sabor suave, sal equilibrado',
+        '⚖️ Peça inteira com aproximadamente 1kg',
+      ],
     },
     {
       id: 2,
@@ -52,6 +61,14 @@ export function useProducts() {
       image: 'https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?auto=format&fit=crop&w=800&q=80',
       category: 'queijos',
       origin: 'Minas Gerais',
+      characteristics: [
+        '🧀 Queijo Minas Frescal',
+        '🥛 Feito com leite integral pasteurizado',
+        '⚪ Massa branca e cremosa',
+        '💧 Textura úmida e suave',
+        '🧂 Sabor delicado e levemente salgado',
+        '⚖️ Embalagem com aproximadamente 400g',
+      ],
     },
     {
       id: 3,
@@ -62,6 +79,14 @@ export function useProducts() {
       badge: 'Patrimônio',
       category: 'queijos',
       origin: 'Serro, MG',
+      characteristics: [
+        '🧀 Queijo do Serro artesanal',
+        '⏳ Curado',
+        '🟡 Casca amarela firme',
+        '🏛️ Patrimônio cultural imaterial do Brasil',
+        '🧂 Sabor intenso e marcante',
+        '⚖️ Peça inteira com aproximadamente 900g',
+      ],
     },
 
     // — Doces & Mel —
@@ -74,6 +99,14 @@ export function useProducts() {
       badge: 'Artesanal',
       category: 'doces',
       origin: 'Minas Gerais',
+      characteristics: [
+        '🍯 Doce de leite artesanal',
+        '🥛 Produzido com leite integral',
+        '🌀 Textura cremosa e sedosa',
+        '🏭 Produzido em pequenos lotes',
+        '🍬 Sabor caramelado intenso',
+        '⚖️ Pote de 400g',
+      ],
     },
     {
       id: 5,
@@ -83,6 +116,14 @@ export function useProducts() {
       image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80',
       category: 'doces',
       origin: 'Interior de MG',
+      characteristics: [
+        '🫙 Goiabada em bloco',
+        '🍓 Feita com goiaba madura selecionada',
+        '🟥 Cor vermelha intensa',
+        '🧀 Combina perfeitamente com queijo',
+        '🌿 Receita artesanal tradicional',
+        '⚖️ Bloco de aproximadamente 500g',
+      ],
     },
     {
       id: 6,
@@ -93,6 +134,14 @@ export function useProducts() {
       badge: 'Orgânico',
       category: 'doces',
       origin: 'Triângulo Mineiro',
+      characteristics: [
+        '🍯 Mel silvestre orgânico',
+        '🌸 Flores nativas do cerrado mineiro',
+        '✅ Produção sustentável e certificada',
+        '🌿 Sem aditivos ou conservantes',
+        '💛 Cor âmbar e aroma floral',
+        '⚖️ Pote de 350g',
+      ],
     },
 
     // — Café Especial —
@@ -105,6 +154,14 @@ export function useProducts() {
       badge: 'Specialty',
       category: 'cafe',
       origin: 'Sul de Minas, MG',
+      characteristics: [
+        '☕ Grãos Specialty',
+        '🏆 Pontuação acima de 80 na escala SCA',
+        '🍫 Notas de caramelo e chocolate',
+        '🍒 Toque de frutas vermelhas',
+        '🔥 Torra média',
+        '⚖️ Pacote de 250g',
+      ],
     },
     {
       id: 8,
@@ -114,6 +171,14 @@ export function useProducts() {
       image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=800&q=80',
       category: 'cafe',
       origin: 'Matas de Minas, MG',
+      characteristics: [
+        '☕ Café torrado artesanal',
+        '🔥 Torra média artesanal',
+        '🍬 Realça a doçura natural dos grãos',
+        '⚙️ Moagem a pedido',
+        '🌿 Grãos mineiros selecionados',
+        '⚖️ Pacote de 250g',
+      ],
     },
 
     // — Biscoitos —
@@ -125,6 +190,14 @@ export function useProducts() {
       image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=800&q=80',
       category: 'biscoitos',
       origin: 'Minas Gerais',
+      characteristics: [
+        '🍪 Biscoito de polvilho azedo',
+        '🔥 Assado no forno',
+        '💨 Crocante e levinho',
+        '👵 Receita tradicional de avó',
+        '🌾 Sem glúten',
+        '⚖️ Pacote de 200g',
+      ],
     },
     {
       id: 10,
@@ -135,6 +208,14 @@ export function useProducts() {
       badge: 'Novo',
       category: 'biscoitos',
       origin: 'Minas Gerais',
+      characteristics: [
+        '🍪 Biscoito amanteigado artesanal',
+        '🧈 Feito com manteiga de qualidade',
+        '💛 Textura que derrete na boca',
+        '☕ Perfeito para acompanhar café',
+        '🍬 Sabor delicado e adocicado',
+        '⚖️ Pacote de 200g',
+      ],
     },
 
     // — Seleções Gourmet —
@@ -146,6 +227,14 @@ export function useProducts() {
       image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80',
       category: 'gourmet',
       origin: 'Minas Gerais',
+      characteristics: [
+        '🥩 Torresmo de barriga',
+        '🔥 Crocante por fora, suculento por dentro',
+        '🌿 Temperado na receita mineira original',
+        '🧂 Sal e temperos naturais',
+        '🏠 Produção artesanal',
+        '⚖️ Embalagem de 200g',
+      ],
     },
     {
       id: 12,
@@ -156,6 +245,14 @@ export function useProducts() {
       badge: 'Favorito',
       category: 'gourmet',
       origin: 'Interior de MG',
+      characteristics: [
+        '🫙 Geleia artesanal de jabuticaba',
+        '🟣 Cor roxa intensa',
+        '🍇 Sabor único e levemente agridoce',
+        '🌳 Jabuticaba do pomar',
+        '🌿 Sem conservantes artificiais',
+        '⚖️ Pote de 300g',
+      ],
     },
   ]
 

@@ -29,16 +29,16 @@ const alignClass: Record<NonNullable<Props['align']>, string> = {
 
     <!-- Rótulo eyebrow com linha dourada decorativa -->
     <div v-if="eyebrow" :class="['flex items-center gap-3', align === 'center' ? 'justify-center' : '']">
-      <div :class="['h-px w-8 flex-shrink-0', light ? 'bg-[#E6CDA1]/60' : 'bg-[#DE8402]/60']" />
+      <div :class="['h-px w-8 flex-shrink-0', light ? 'bg-[#E7D7BC]/60' : 'bg-[#2F5946]/60']" />
       <span
         :class="[
           'font-body text-xs font-semibold tracking-[0.2em] uppercase whitespace-nowrap',
-          light ? 'text-[#E6CDA1]' : 'text-[#DE8402]',
+          light ? 'text-[#E7D7BC]' : 'text-[#2F5946]',
         ]"
       >
         {{ eyebrow }}
       </span>
-      <div :class="['h-px w-8 flex-shrink-0', light ? 'bg-[#E6CDA1]/60' : 'bg-[#DE8402]/60']" />
+      <div :class="['h-px w-8 flex-shrink-0', light ? 'bg-[#E7D7BC]/60' : 'bg-[#2F5946]/60']" />
     </div>
 
     <!-- Título principal — tipografia serif editorial -->
@@ -57,7 +57,7 @@ const alignClass: Record<NonNullable<Props['align']>, string> = {
       :class="[
         'font-body max-w-2xl leading-relaxed mt-1',
         'text-base md:text-lg',
-        light ? 'text-[#E6CDA1]/80' : 'text-[#7A6355]',
+        light ? 'text-[#E7D7BC]/80' : 'text-[#7A6355]',
       ]"
     >
       {{ subtitle }}

@@ -42,8 +42,8 @@ const pillars = [
 
           <!-- Eyebrow -->
           <div class="flex items-center gap-3 mb-6">
-            <div class="h-px w-8 bg-[#DE8402]/60" aria-hidden="true" />
-            <span class="font-body text-xs font-semibold tracking-[0.2em] uppercase text-[#DE8402]">
+            <div class="h-px w-8 bg-[#2F5946]/60" aria-hidden="true" />
+            <span class="font-body text-xs font-semibold tracking-[0.2em] uppercase text-[#2F5946]">
               Nossa História
             </span>
           </div>
@@ -73,7 +73,7 @@ const pillars = [
             <div
               v-for="pillar in pillars"
               :key="pillar.title"
-              class="flex items-start gap-3 p-4 rounded-2xl bg-[#F5EDD8]"
+              class="flex items-start gap-3 p-4 rounded-2xl bg-[#F3EBDD]"
             >
               <!-- Ícone do pilar -->
               <span class="text-xl flex-shrink-0 mt-0.5" aria-hidden="true">{{ pillar.icon }}</span>
@@ -89,9 +89,9 @@ const pillars = [
             href="https://wa.me/5531999999999?text=Olá! Quero conhecer mais sobre o Quintal dos Mineiros."
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 bg-[#DE8402] text-white
+            class="inline-flex items-center gap-2 bg-[#2F5946] text-white
                    px-8 py-4 rounded-full font-body font-semibold text-base
-                   hover:bg-[#C47502] transition-all duration-300 shadow-sm hover:shadow-md"
+                   hover:bg-[#254637] transition-all duration-300 shadow-sm hover:shadow-md"
           >
             Conheça nossa seleção
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
@@ -113,16 +113,16 @@ const pillars = [
             />
             <!-- Sobreposição sutil de cor quente -->
             <div
-              class="absolute inset-0 bg-gradient-to-br from-[#DE8402]/10 to-transparent mix-blend-multiply"
+              class="absolute inset-0 bg-gradient-to-br from-[#2F5946]/10 to-transparent mix-blend-multiply"
             />
           </div>
 
           <!-- Card flutuante de estatísticas da marca -->
           <div
             class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-xl
-                   border border-[#E6CDA1]/50 hidden sm:block"
+                   border border-[#E7D7BC]/50 hidden sm:block"
           >
-            <p class="font-body text-xs text-[#DE8402] font-semibold tracking-wide uppercase mb-3">
+            <p class="font-body text-xs text-[#2F5946] font-semibold tracking-wide uppercase mb-3">
               Em números
             </p>
             <div class="flex items-center gap-5">
@@ -130,12 +130,12 @@ const pillars = [
                 <p class="font-display font-bold text-2xl text-[#2C1810]">+50</p>
                 <p class="font-body text-xs text-[#7A6355]">produtores</p>
               </div>
-              <div class="w-px h-8 bg-[#E6CDA1]" aria-hidden="true" />
+              <div class="w-px h-8 bg-[#E7D7BC]" aria-hidden="true" />
               <div class="text-center">
                 <p class="font-display font-bold text-2xl text-[#2C1810]">+200</p>
                 <p class="font-body text-xs text-[#7A6355]">produtos</p>
               </div>
-              <div class="w-px h-8 bg-[#E6CDA1]" aria-hidden="true" />
+              <div class="w-px h-8 bg-[#E7D7BC]" aria-hidden="true" />
               <div class="text-center">
                 <p class="font-display font-bold text-2xl text-[#2C1810]">5★</p>
                 <p class="font-body text-xs text-[#7A6355]">avaliação</p>

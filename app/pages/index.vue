@@ -30,31 +30,27 @@ useSeoMeta({
       <!-- "O melhor de Minas na sua mesa" com CTA para cestas -->
       <HeroSection />
 
-      <!-- 2. Cestas em Destaque — foco comercial principal -->
-      <!-- Grade editorial de cestas curadas com preço e CTA -->
-      <FeaturedBasketsSection />
+      <!-- 2. Kits em Destaque — foco comercial principal -->
+      <!-- Grade editorial de kits curados com preço e CTA -->
+      <KitsSection />
 
-      <!-- 3. Experiência Gourmet — storytelling visual -->
-      <!-- Momentos mineiros: café da tarde, mesa de queijos, presente perfeito -->
-      <GourmetExperienceSection />
-
-      <!-- 4. Catálogo de Produtos — exploração curada -->
+<!-- 3. Catálogo de Produtos — exploração curada -->
       <!-- Filtro por categoria + grade de produtos artesanais -->
-      <ProductCatalogSection />
+      <CatalogSection />
 
-      <!-- 5. Monte sua Cesta — personalização interativa -->
+      <!-- 4. Monte sua Cesta — personalização interativa -->
       <!-- Seletor de itens + painel de resumo + CTA WhatsApp -->
-      <BuildYourBasketSection />
+      <BuildKitSection />
 
-      <!-- 6. Nossa História — narrativa emocional da marca -->
+      <!-- 5. Nossa História — narrativa emocional da marca -->
       <!-- Origem, valores, pilares e imagem editorial -->
       <BrandStorySection />
 
-      <!-- 7. Depoimentos — prova social elegante -->
+      <!-- 6. Depoimentos — prova social elegante -->
       <!-- Cartões de clientes reais com avaliação e ocasião -->
       <TestimonialsSection />
 
-      <!-- 8. CTA WhatsApp Final — convite pessoal e acolhedor -->
+      <!-- 7. CTA WhatsApp Final — convite pessoal e acolhedor -->
       <!-- "Pronto para provar o sabor de Minas?" -->
       <WhatsAppCtaSection />
     </main>

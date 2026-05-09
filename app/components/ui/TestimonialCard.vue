@@ -14,14 +14,14 @@ defineProps<Props>()
 <template>
   <!-- Cartão de depoimento — estilo editorial cálido -->
   <figure
-    class="bg-white rounded-2xl p-7 shadow-sm border border-[#E6CDA1]/40 flex flex-col gap-5 h-full"
+    class="bg-white rounded-2xl p-7 shadow-sm border border-[#E7D7BC]/40 flex flex-col gap-5 h-full"
   >
     <!-- ─── Avaliação por Estrelas ─── -->
     <div class="flex items-center gap-1" aria-label="Avaliação: 5 de 5 estrelas">
       <span
         v-for="i in 5"
         :key="i"
-        :class="i <= testimonial.rating ? 'text-[#DE8402]' : 'text-[#E6CDA1]'"
+        :class="i <= testimonial.rating ? 'text-[#2F5946]' : 'text-[#E7D7BC]'"
         aria-hidden="true"
       >★</span>
     </div>
@@ -41,14 +41,14 @@ defineProps<Props>()
     </blockquote>
 
     <!-- ─── Identificação do Autor ─── -->
-    <figcaption class="flex items-center gap-3 pt-4 border-t border-[#E6CDA1]/50">
+    <figcaption class="flex items-center gap-3 pt-4 border-t border-[#E7D7BC]/50">
 
       <!-- Avatar com inicial do nome -->
       <div
-        class="w-11 h-11 rounded-full bg-[#F5EDD8] flex items-center justify-center flex-shrink-0"
+        class="w-11 h-11 rounded-full bg-[#F3EBDD] flex items-center justify-center flex-shrink-0"
         aria-hidden="true"
       >
-        <span class="font-display font-semibold text-[#DE8402] text-lg">
+        <span class="font-display font-semibold text-[#2F5946] text-lg">
           {{ testimonial.name.charAt(0) }}
         </span>
       </div>
