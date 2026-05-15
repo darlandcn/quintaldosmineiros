@@ -10,10 +10,16 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@oxc-transform/binding-wasm32-wasi": "^0.128.0",
+    "@supabase/supabase-js": "^2.105.4",
     "@tailwindcss/vite": "^4.2.4",
+    "lucide-vue-next": "^1.0.0",
     "nuxt": "^4.4.4",
     "tailwindcss": "^4.2.4",
     "vue": "^3.5.33",
     "vue-router": "^5.0.6"
+  },
+  "optionalDependencies": {
+    "@oxc-transform/binding-win32-x64-msvc": "^0.129.0"
   }
 }

@@ -107,9 +107,9 @@ const { totalItems, isOpen: cartOpen } = useCart()
         class="relative p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
         aria-label="Abrir cesta de compras"
       >
-        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.5 10C8.5 7 10 4.5 12 4.5S15.5 7 15.5 10"/>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18v5.5A5.5 5.5 0 0 1 15.5 21h-7A5.5 5.5 0 0 1 3 15.5V10z"/>
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/>
+          <path d="M8 11V6a4 4 0 0 1 8 0v5"/>
         </svg>
         <span
           v-if="totalItems > 0"
@@ -122,70 +122,148 @@ const { totalItems, isOpen: cartOpen } = useCart()
       </button>
     </div>
 
-    <!-- ─── Nav Compacta — hamburger à esquerda ─── -->
+    <!-- ─── Nav Compacta — hamburger à esquerda, cesta à direita (mobile) ─── -->
     <div
-      class="absolute inset-0 px-5 md:px-8 flex items-center
+      class="absolute inset-0 px-5 md:px-8 flex items-center justify-between
              transition-all duration-300"
       :class="isHero ? 'opacity-0 pointer-events-none' : 'opacity-100'"
     >
-      <!-- Botão hamburger -->
+      <!-- Botão hamburger / fechar -->
       <button
         @click="mobileOpen = !mobileOpen"
-        class="flex flex-col justify-center gap-[5px] p-2 text-white
-               hover:bg-white/10 transition-colors rounded"
-        aria-label="Abrir menu"
+        class="p-2 text-white hover:bg-white/10 transition-colors rounded"
+        :aria-label="mobileOpen ? 'Fechar menu' : 'Abrir menu'"
       >
-        <span class="block w-5 h-[2.5px] bg-white transition-all duration-300"
-              :class="mobileOpen ? 'rotate-45 translate-y-[6.5px]' : ''" />
-        <span class="block w-5 h-[2.5px] bg-white transition-all duration-300"
-              :class="mobileOpen ? 'opacity-0' : ''" />
-        <span class="block w-5 h-[2.5px] bg-white transition-all duration-300"
-              :class="mobileOpen ? '-rotate-45 -translate-y-[6.5px]' : ''" />
+        <div class="relative w-6 h-6">
+          <!-- Ícone menu -->
+          <svg
+            class="absolute inset-0 w-6 h-6 transition-all duration-300"
+            :class="mobileOpen ? 'opacity-0 scale-75' : 'opacity-100 scale-100'"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+          >
+            <path d="M4 5h16"/>
+            <path d="M4 12h16"/>
+            <path d="M4 19h16"/>
+          </svg>
+          <!-- Ícone X -->
+          <svg
+            class="absolute inset-0 w-6 h-6 transition-all duration-300"
+            :class="mobileOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-75'"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+          >
+            <path d="M18 6 6 18"/>
+            <path d="m6 6 12 12"/>
+          </svg>
+        </div>
+      </button>
+
+      <!-- Cesta de compras — visível só no mobile -->
+      <button
+        @click="cartOpen = true"
+        class="relative md:hidden p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
+        aria-label="Abrir cesta de compras"
+      >
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/>
+          <path d="M8 11V6a4 4 0 0 1 8 0v5"/>
+        </svg>
+        <span
+          v-if="totalItems > 0"
+          class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1
+                 bg-white text-[#2F5946] font-body font-bold text-[10px]
+                 rounded-full flex items-center justify-center leading-none"
+        >
+          {{ totalItems > 99 ? '99+' : totalItems }}
+        </span>
       </button>
     </div>
 
-    <!-- ─── Dropdown do Menu ─── -->
+  </header>
+
+  <!-- ─── Drawer de Navegação Mobile ─── -->
+  <Teleport to="body">
+    <!-- Backdrop -->
     <Transition
-      enter-active-class="transition-all duration-200 ease-out"
-      enter-from-class="opacity-0 -translate-y-2"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition-all duration-150 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-2"
+      enter-active-class="transition-opacity duration-300"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-200"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
       <div
-        v-if="mobileOpen && !isHero"
-        class="absolute top-full left-0 right-0
-               bg-[#254637] border-t border-white/20 shadow-lg"
-      >
-        <ul class="flex flex-col divide-y divide-white/10">
-          <li v-for="link in navLinks" :key="link.href">
-            <a
-              :href="link.href"
-              @click="mobileOpen = false"
-              class="block px-8 py-4 font-subheadline text-xs font-semibold
-                     tracking-[0.15em] uppercase text-white/85
-                     hover:text-white hover:bg-white/10 transition-colors"
-            >
-              {{ link.label }}
-            </a>
-          </li>
-          <li class="px-8 py-5">
-            <a
-              href="https://wa.me/5531999999999?text=Olá! Gostaria de conhecer as cestas do Quintal dos Mineiros."
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center w-full px-6 py-2.5
-                     bg-transparent hover:bg-white/10 text-white
-                     font-subheadline text-xs font-semibold tracking-[0.15em] uppercase
-                     transition-all duration-300 border border-white/40 hover:border-white/70"
-              @click="mobileOpen = false"
-            >
-              Fazer Pedido
-            </a>
-          </li>
-        </ul>
-      </div>
+        v-if="mobileOpen"
+        class="fixed inset-0 z-[60] bg-black/40 backdrop-blur-sm"
+        @click="mobileOpen = false"
+        aria-hidden="true"
+      />
     </Transition>
-  </header>
+
+    <!-- Painel deslizante da esquerda -->
+    <Transition
+      enter-active-class="transition-transform duration-300 ease-out"
+      enter-from-class="-translate-x-full"
+      enter-to-class="translate-x-0"
+      leave-active-class="transition-transform duration-200 ease-in"
+      leave-from-class="translate-x-0"
+      leave-to-class="-translate-x-full"
+    >
+      <aside
+        v-if="mobileOpen"
+        class="fixed top-0 left-0 bottom-0 z-[70] w-72
+               bg-[#2F5946] shadow-2xl flex flex-col"
+        role="dialog"
+        aria-label="Menu de navegação"
+        aria-modal="true"
+      >
+        <!-- Cabeçalho do drawer com logo e fechar -->
+        <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">
+          <div class="flex flex-col items-start">
+            <img src="/images/logo_passarinho_2.png" alt="Quintal dos Mineiros" class="h-8 w-8 object-contain" />
+            <img src="/images/logo_nome_2.png" alt="Quintal dos Mineiros" class="h-7 object-contain -mt-0.5" />
+          </div>
+          <button
+            @click="mobileOpen = false"
+            class="p-2 rounded-full hover:bg-white/10 transition-colors text-white/70 hover:text-white"
+            aria-label="Fechar menu"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Links de navegação -->
+        <nav class="flex-1 flex flex-col px-4 py-6 gap-1">
+          <a
+            v-for="link in navLinks"
+            :key="link.href"
+            :href="link.href"
+            @click="mobileOpen = false"
+            class="px-4 py-3.5 font-body text-sm font-medium tracking-[0.12em] uppercase
+                   text-white/80 hover:text-white hover:bg-white/10
+                   transition-colors rounded-lg"
+          >
+            {{ link.label }}
+          </a>
+        </nav>
+
+        <!-- CTA no rodapé do drawer -->
+        <div class="px-6 py-6 border-t border-white/10">
+          <a
+            href="https://wa.me/5531999999999?text=Olá! Gostaria de conhecer as cestas do Quintal dos Mineiros."
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="mobileOpen = false"
+            class="inline-flex items-center justify-center w-full px-6 py-2.5
+                   bg-transparent hover:bg-white/10 text-white
+                   font-body text-xs font-semibold tracking-[0.15em] uppercase
+                   transition-all duration-300 border border-white/40 hover:border-white/70"
+          >
+            Fazer Pedido
+          </a>
+        </div>
+      </aside>
+    </Transition>
+  </Teleport>
 </template>

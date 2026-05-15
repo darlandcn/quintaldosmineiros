@@ -1,4 +1,6 @@
 <script setup lang="ts">
+definePageMeta({ layout: false })
+
 // ─── Página Inicial — Quintal dos Mineiros ───
 // Assembly de todas as seções na ordem narrativa planejada
 // Cada seção conta uma parte da experiência da marca
@@ -50,9 +52,9 @@ useSeoMeta({
       <!-- Cartões de clientes reais com avaliação e ocasião -->
       <TestimonialsSection />
 
-      <!-- 7. CTA WhatsApp Final — convite pessoal e acolhedor -->
+      <!-- 7. CTA Final — convite pessoal e acolhedor -->
       <!-- "Pronto para provar o sabor de Minas?" -->
-      <WhatsAppCtaSection />
+      <CtaSection />
     </main>
 
     <!-- ─── Rodapé Global ─── -->

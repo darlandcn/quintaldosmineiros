@@ -9,15 +9,15 @@ const { testimonials } = useTestimonials()
 
 <template>
   <!-- Seção de depoimentos — fundo creme quente -->
-  <section id="depoimentos" class="bg-[#F3EBDD] py-24 md:py-32">
+  <section id="depoimentos" class="bg-[#FAF6EE] py-14 md:py-20">
     <div class="max-w-7xl mx-auto px-5 md:px-8">
 
       <!-- ─── Cabeçalho da Seção ─── -->
       <div class="mb-14 md:mb-16">
         <SectionHeader
-          eyebrow="O que dizem nossos clientes"
+          eyebrow="Histórias de quem já provou Minas"
           title="Histórias de quem<br /><em>já provou de Minas</em>"
-          subtitle="Mais de 2.000 cestas entregues. Cada uma com uma história de carinho por trás."
+          subtitle="Momentos compartilhados por clientes que levaram o sabor mineiro para a própria mesa."
           align="center"
         />
       </div>

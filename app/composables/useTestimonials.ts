@@ -19,7 +19,6 @@ export function useTestimonials() {
       location: 'Belo Horizonte, MG',
       text: 'A cesta chegou lindamente embalada e os produtos são incríveis. O queijo Canastra e o doce de leite são de outro nível. Minha família ficou emocionada com cada sabor!',
       rating: 5,
-      occasion: 'Natal em Família',
     },
     {
       id: 2,
@@ -27,7 +26,6 @@ export function useTestimonials() {
       location: 'São Paulo, SP',
       text: 'Presenteei minha mãe no aniversário e ela ficou emocionada. O atendimento pelo WhatsApp foi super personalizado — senti que estava comprando de quem realmente conhece os produtos.',
       rating: 5,
-      occasion: 'Presente de Aniversário',
     },
     {
       id: 3,
@@ -35,7 +33,6 @@ export function useTestimonials() {
       location: 'Rio de Janeiro, RJ',
       text: 'O café especial do Sul de Minas é simplesmente extraordinário. Já fiz três pedidos e sempre chega fresco, bem embalado e no prazo. Virei cliente fiel!',
       rating: 5,
-      occasion: 'Compra Recorrente',
     },
     {
       id: 4,
@@ -43,7 +40,6 @@ export function useTestimonials() {
       location: 'Uberlândia, MG',
       text: 'Comprei para presentear meu sócio. A apresentação é muito sofisticada e os produtos são genuinamente artesanais. Impressionou a todos no escritório.',
       rating: 5,
-      occasion: 'Presente Corporativo',
     },
   ]
 

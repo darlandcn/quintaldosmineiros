@@ -2,6 +2,13 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      supabaseUrl: '',
+      supabaseAnonKey: '',
+    },
+  },
+
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
 
@@ -11,6 +18,9 @@ export default defineNuxtConfig({
   // ─── Vite Plugins ───
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['lucide-vue-next'],
+    },
   },
 
   // ─── Componentes — sem prefixo de diretório no nome ───

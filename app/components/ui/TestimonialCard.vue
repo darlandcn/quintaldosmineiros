@@ -14,7 +14,7 @@ defineProps<Props>()
 <template>
   <!-- Cartão de depoimento — estilo editorial cálido -->
   <figure
-    class="bg-white rounded-2xl p-7 shadow-sm border border-[#E7D7BC]/40 flex flex-col gap-5 h-full"
+    class="bg-white rounded-2xl p-7 shadow-sm border border-[#2F5946]/30 flex flex-col gap-5 h-full"
   >
     <!-- ─── Avaliação por Estrelas ─── -->
     <div class="flex items-center gap-1" aria-label="Avaliação: 5 de 5 estrelas">
