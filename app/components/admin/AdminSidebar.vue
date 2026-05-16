@@ -26,6 +26,19 @@
       </NuxtLink>
 
       <NuxtLink
+        to="/admin/pedidos"
+        class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors"
+        :class="isActive('/admin/pedidos')
+          ? 'bg-white/20 text-white'
+          : 'text-white/70 hover:bg-white/15 hover:text-white'"
+      >
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0M3.75 9h16.5" />
+        </svg>
+        Pedidos
+      </NuxtLink>
+
+      <NuxtLink
         to="/admin/produtos"
         class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors"
         :class="isActive('/admin/produtos')
