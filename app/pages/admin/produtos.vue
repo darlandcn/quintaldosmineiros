@@ -2,10 +2,10 @@
   <div class="flex flex-col h-full min-h-0">
 
     <!-- Page Header -->
-    <div class="shrink-0 bg-white border-b border-[#2F5946]/20 px-10 py-6">
+    <div class="shrink-0 bg-white border-b border-[#2F5946]/20 px-10 py-5">
       <div class="flex items-end justify-between">
 
-        <div class="space-y-1">
+        <div class="space-y-0.5">
 <h1 class="text-2xl font-bold text-gray-900 tracking-tight leading-none">Produtos</h1>
           <p class="text-sm text-gray-400 font-normal">Gerencie o catálogo de produtos da loja</p>
         </div>
@@ -26,10 +26,10 @@
     </div>
 
     <!-- Page Body -->
-    <div class="flex-1 overflow-y-auto px-8 py-6 space-y-5">
+    <div class="flex-1 min-h-0 flex flex-col px-6 py-4 gap-3 overflow-hidden">
 
       <!-- Stats Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="shrink-0 grid grid-cols-1 sm:grid-cols-3 gap-3">
 
         <!-- Total de produtos -->
         <div class="bg-white rounded-xl border border-[#2F5946]/20 px-6 py-5 flex items-center gap-4">
@@ -82,7 +82,7 @@
       </div>
 
       <!-- Search + Filters -->
-      <div class="flex items-center gap-3">
+      <div class="shrink-0 flex items-center gap-3">
 
         <!-- Search -->
         <div class="flex-1 bg-white rounded-lg border border-[#2F5946]/20 px-4 py-2.5 flex items-center gap-3 focus-within:border-[#2F5946]/50 focus-within:ring-2 focus-within:ring-[#2F5946]/10 transition-all">
@@ -124,6 +124,9 @@
 
       </div>
 
+      <!-- Área da tabela (cresce e scrolla) -->
+      <div class="flex-1 min-h-0 flex flex-col overflow-hidden">
+
       <!-- Loading -->
       <div v-if="loading" class="flex items-center justify-center py-20">
         <div class="flex items-center gap-2 text-sm text-gray-400">
@@ -141,7 +144,7 @@
       </div>
 
       <!-- Empty: sem produtos -->
-      <div v-else-if="products.length === 0" class="bg-white rounded-2xl border border-zinc-200/60 shadow-sm flex flex-col items-center justify-center py-24 text-center">
+      <div v-else-if="products.length === 0" class="bg-white rounded-2xl border border-[#2F5946]/20 shadow-sm flex flex-col items-center justify-center py-24 text-center">
         <div class="w-12 h-12 rounded-2xl bg-zinc-50 border border-zinc-100 flex items-center justify-center mb-4">
           <svg class="w-5 h-5 text-zinc-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM16 3H8L6 7h12l-2-4z" />
@@ -152,9 +155,10 @@
       </div>
 
       <!-- Table -->
-      <div v-else class="bg-white rounded-2xl border border-zinc-200/60 shadow-[0_1px_4px_rgba(0,0,0,0.04)] overflow-hidden">
+      <div v-else class="flex-1 min-h-0 flex flex-col bg-white rounded-2xl border border-[#2F5946]/20 shadow-[0_1px_4px_rgba(0,0,0,0.04)] overflow-hidden">
+        <div class="flex-1 overflow-y-auto min-h-0">
         <table class="w-full">
-          <thead>
+          <thead class="sticky top-0 bg-white">
             <tr class="border-b border-zinc-100">
               <th class="text-left px-6 py-4 text-xs font-medium text-zinc-500 w-[45%]">Produto</th>
               <th class="text-left px-6 py-4 text-xs font-medium text-zinc-500">Preço</th>
@@ -181,7 +185,8 @@
             <tr
               v-for="product in filteredProducts"
               :key="product.id"
-              class="group border-b border-zinc-50 last:border-0 hover:bg-zinc-50 transition-all duration-200"
+              class="group border-b border-zinc-50 last:border-0 hover:bg-zinc-50 transition-all duration-200 cursor-pointer"
+              @dblclick="openEdit(product)"
             >
               <!-- Produto -->
               <td class="px-6 py-4">
@@ -251,9 +256,10 @@
 
           </tbody>
         </table>
+        </div>
 
         <!-- Rodapé -->
-        <div class="px-6 py-4 border-t border-zinc-100 flex items-center justify-between">
+        <div class="shrink-0 px-6 py-3 border-t border-zinc-100 flex items-center justify-between">
           <p class="text-xs text-zinc-400">
             {{ filteredProducts.length }}
             {{ filteredProducts.length === 1 ? 'produto' : 'produtos' }}
@@ -264,6 +270,8 @@
         </div>
 
       </div>
+
+      </div> <!-- /área da tabela -->
 
     </div>
 

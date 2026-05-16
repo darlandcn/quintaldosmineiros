@@ -8,6 +8,7 @@
           type="text"
           required
           class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
+          @input="form.name = capitalizeFirst(form.name)"
         />
       </div>
 
@@ -17,6 +18,7 @@
           v-model="form.description"
           rows="3"
           class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 resize-none"
+          @input="form.description = capitalizeFirst(form.description)"
         />
       </div>
 
@@ -136,6 +138,10 @@ const form = reactive<NewProduct>({
   stock: props.product?.stock ?? 0,
   images: props.product?.images ?? [],
 })
+
+function capitalizeFirst(val: string) {
+  return val ? val.charAt(0).toUpperCase() + val.slice(1) : val
+}
 
 function setFile(file: File) {
   selectedFile.value = file
