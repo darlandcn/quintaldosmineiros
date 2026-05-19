@@ -23,15 +23,15 @@ onMounted(() => {
 
 <template>
   <section
-    class="relative min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
+    class="relative h-[calc(100vh-86px)] bg-cover bg-center bg-no-repeat mt-[86px]"
     style="background-image: url('/images/hero_image_2.png')"
   >
     <!-- Overlay atmosférico -->
     <div class="absolute inset-0 hero-overlay" />
 
     <!-- Conteúdo — posicionado no terço inferior (leitura cinematográfica) -->
-    <div class="relative z-10 min-h-screen flex flex-col justify-end
-                px-8 md:px-16 lg:px-24 pb-24 md:pb-14 pt-36">
+    <div class="relative z-10 h-full flex flex-col justify-end
+                px-8 md:px-16 lg:px-24 pb-10 md:pb-14">
 
       <!-- Headline rotativa — container de altura fixa para evitar layout shift -->
       <div class="relative h-36 md:h-40 lg:h-48 mb-8">

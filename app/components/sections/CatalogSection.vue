@@ -1,10 +1,7 @@
 <script setup lang="ts">
-// ─── ProductCatalogSection Component ───
-// Catálogo curado de produtos individuais com filtro interativo por categoria
-// Apresentação editorial com grade responsiva
+const { products, loading, error, fetchProducts } = useProducts()
 
-// ─── Estado do Catálogo via Composable ───
-const { categories, filteredProducts, selectedCategory } = useProducts()
+onMounted(fetchProducts)
 </script>
 
 <template>
@@ -22,53 +19,53 @@ const { categories, filteredProducts, selectedCategory } = useProducts()
         />
       </div>
 
-      <!-- ─── Filtro de Categorias ─── -->
-      <!-- Scroll horizontal no mobile para comportar todas as pílulas -->
-      <div class="overflow-x-auto pb-2 -mx-5 px-5 md:mx-0 md:px-0 mb-10">
-        <div class="flex items-center gap-2.5 min-w-max md:flex-wrap md:min-w-0 md:justify-center">
-          <CategoryPill
-            v-for="cat in categories"
-            :key="cat.id"
-            :label="cat.label"
-            :icon="cat.icon"
-            :active="selectedCategory === cat.id"
-            @click="selectedCategory = cat.id"
-          />
+      <!-- ─── Loading ─── -->
+      <div v-if="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div
+          v-for="i in 8"
+          :key="i"
+          class="animate-pulse bg-white border border-[#2F5946]/20 shadow-xl shadow-[#2F5946]/10"
+        >
+          <div class="aspect-square bg-[#E7D7BC]/50" />
+          <div class="p-6 space-y-3">
+            <div class="h-4 bg-[#E7D7BC]/60 rounded w-3/4 mx-auto" />
+            <div class="h-px bg-[#E7D7BC]/60" />
+            <div class="flex justify-between">
+              <div class="h-4 bg-[#E7D7BC]/60 rounded w-1/4" />
+              <div class="h-9 bg-[#2F5946]/20 rounded w-1/3" />
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- ─── Grade de Produtos Filtrados ─── -->
-      <!-- Transição suave ao mudar de categoria -->
-      <Transition
-        mode="out-in"
-        enter-active-class="transition-all duration-300 ease-out"
-        enter-from-class="opacity-0 translate-y-4"
-        enter-to-class="opacity-100 translate-y-0"
-        leave-active-class="transition-all duration-150 ease-in"
-        leave-from-class="opacity-100 translate-y-0"
-        leave-to-class="opacity-0 translate-y-2"
-      >
-        <div
-          :key="selectedCategory"
-          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      <!-- ─── Erro ─── -->
+      <div v-else-if="error" class="text-center py-20">
+        <p class="font-display italic text-2xl text-[#7A6355]">Não foi possível carregar os produtos.</p>
+        <button
+          class="mt-6 font-body text-sm font-semibold text-[#2F5946] hover:underline"
+          @click="fetchProducts"
         >
+          Tentar novamente
+        </button>
+      </div>
+
+      <!-- ─── Grade de Produtos ─── -->
+      <template v-else>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <ProductCard
-            v-for="product in filteredProducts"
+            v-for="product in products"
             :key="product.id"
             :product="product"
           />
         </div>
-      </Transition>
 
-      <!-- ─── Estado Vazio (se categoria não tem produtos) ─── -->
-      <div
-        v-if="filteredProducts.length === 0"
-        class="text-center py-20"
-      >
-        <p class="font-display italic text-2xl text-[#7A6355]">
-          Em breve mais produtos nessa categoria
-        </p>
-      </div>
+        <!-- ─── Estado Vazio ─── -->
+        <div v-if="products.length === 0" class="text-center py-20">
+          <p class="font-display italic text-2xl text-[#7A6355]">
+            Nenhum produto disponível no momento
+          </p>
+        </div>
+      </template>
 
     </div>
   </section>

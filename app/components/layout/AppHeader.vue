@@ -12,10 +12,12 @@ const navLinks = [
 ]
 
 // ─── Detecção do Hero Section ───
-const isHero = ref(true)
+const props = defineProps<{ compact?: boolean }>()
+const isHero = ref(!props.compact)
 const mobileOpen = ref(false)
 
 onMounted(() => {
+  if (props.compact) return
   const onScroll = () => {
     isHero.value = window.scrollY < 10
   }
@@ -88,19 +90,6 @@ const { totalItems, isOpen: cartOpen } = useCart()
              hidden md:flex items-center gap-3 transition-all duration-300"
       :class="isHero ? 'top-1/2 -translate-y-[calc(50%+16px)]' : 'top-1/2 -translate-y-1/2'"
     >
-      <!-- CTA WhatsApp -->
-      <a
-        href="https://wa.me/5531999999999?text=Olá! Gostaria de conhecer as cestas do Quintal dos Mineiros."
-        target="_blank"
-        rel="noopener noreferrer"
-        class="inline-flex items-center justify-center px-6 py-2
-               bg-transparent hover:bg-white/10 text-white
-               font-subheadline text-xs font-semibold tracking-[0.15em] uppercase
-               transition-all duration-300 border border-white/40 hover:border-white/70"
-      >
-        Fazer Pedido
-      </a>
-
       <!-- Ícone da cesta com badge de contagem -->
       <button
         @click="cartOpen = true"
@@ -248,21 +237,6 @@ const { totalItems, isOpen: cartOpen } = useCart()
           </a>
         </nav>
 
-        <!-- CTA no rodapé do drawer -->
-        <div class="px-6 py-6 border-t border-white/10">
-          <a
-            href="https://wa.me/5531999999999?text=Olá! Gostaria de conhecer as cestas do Quintal dos Mineiros."
-            target="_blank"
-            rel="noopener noreferrer"
-            @click="mobileOpen = false"
-            class="inline-flex items-center justify-center w-full px-6 py-2.5
-                   bg-transparent hover:bg-white/10 text-white
-                   font-body text-xs font-semibold tracking-[0.15em] uppercase
-                   transition-all duration-300 border border-white/40 hover:border-white/70"
-          >
-            Fazer Pedido
-          </a>
-        </div>
       </aside>
     </Transition>
   </Teleport>
