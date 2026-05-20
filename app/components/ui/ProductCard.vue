@@ -17,9 +17,15 @@ defineProps<{ product: Product }>()
         :src="product.image"
         :alt="product.name"
         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        :class="product.stock <= 0 ? 'opacity-50' : ''"
         loading="lazy"
       />
       <div class="absolute inset-0 bg-gradient-to-t from-[#2C1810]/60 via-transparent to-transparent" />
+      <div v-if="product.stock <= 0" class="absolute inset-0 flex items-center justify-center">
+        <span class="bg-[#2C1810]/80 text-white font-body font-semibold text-xs tracking-widest uppercase px-4 py-1.5">
+          Esgotado
+        </span>
+      </div>
     </div>
 
     <!-- ─── Conteúdo do Card ─── -->

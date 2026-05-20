@@ -6,6 +6,7 @@ export interface Product {
   description: string
   price: string
   image: string
+  stock: number
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -28,7 +29,7 @@ export function useProducts() {
     try {
       const { data, error: err } = await supabase
         .from('products')
-        .select('id, name, description, price, images')
+        .select('id, name, description, price, stock, images')
         .order('name')
       if (err) throw err
       products.value = (data ?? []).map(p => ({
@@ -37,6 +38,7 @@ export function useProducts() {
         description: p.description ?? '',
         price: formatBRL(Number(p.price) || 0),
         image: Array.isArray(p.images) ? (p.images[0] ?? '') : '',
+        stock: Number(p.stock) || 0,
       }))
     } catch (e: any) {
       error.value = e?.message ?? 'Erro ao carregar produtos'

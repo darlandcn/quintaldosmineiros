@@ -1,17 +1,32 @@
 <template>
-  <aside class="w-56 h-screen bg-[#2F5946] text-white flex flex-col shrink-0">
+  <aside class="w-48 h-screen bg-[#2F5946] text-white flex flex-col shrink-0">
 
     <!-- Brand -->
-    <div class="px-5 py-5 border-b border-white/10 flex items-center justify-center gap-0">
-      <img src="/images/logo_passarinho_2.png" alt="" class="h-15 w-auto" />
-      <img src="/images/logo_nome_2.png" alt="Quintal dos Mineiros" class="h-14 w-auto" />
+    <div class="px-4 py-4 border-b border-white/10 flex items-center justify-center gap-0">
+      <img src="/images/logo_passarinho_2.png" alt="" class="h-12 w-auto" />
+      <img src="/images/logo_nome_2.png" alt="Quintal dos Mineiros" class="h-11 w-auto" />
     </div>
 
+    <!-- Ver loja -->
+    <div class="px-2.5 py-3">
+      <NuxtLink
+        to="/"
+        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-sm text-white/70 hover:bg-white/15 hover:text-white transition-colors"
+      >
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+        </svg>
+        Ver loja
+      </NuxtLink>
+    </div>
+
+    <div class="border-t border-white/10" />
+
     <!-- Nav -->
-    <nav class="flex-1 px-3 py-4 space-y-0.5">
+    <nav class="flex-1 px-2.5 py-3 space-y-0.5">
       <NuxtLink
         to="/admin"
-        class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors"
+        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-sm transition-colors"
         :class="isActive('/admin')
           ? 'bg-white/20 text-white'
           : 'text-white/70 hover:bg-white/15 hover:text-white'"
@@ -27,7 +42,7 @@
 
       <NuxtLink
         to="/admin/pedidos"
-        class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors"
+        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-sm transition-colors"
         :class="isActive('/admin/pedidos')
           ? 'bg-white/20 text-white'
           : 'text-white/70 hover:bg-white/15 hover:text-white'"
@@ -40,7 +55,7 @@
 
       <NuxtLink
         to="/admin/produtos"
-        class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors"
+        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-sm transition-colors"
         :class="isActive('/admin/produtos')
           ? 'bg-white/20 text-white'
           : 'text-white/70 hover:bg-white/15 hover:text-white'"
@@ -51,12 +66,25 @@
         </svg>
         Produtos
       </NuxtLink>
+
+      <NuxtLink
+        to="/admin/clientes"
+        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-sm transition-colors"
+        :class="isActive('/admin/clientes')
+          ? 'bg-white/20 text-white'
+          : 'text-white/70 hover:bg-white/15 hover:text-white'"
+      >
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+        </svg>
+        Clientes
+      </NuxtLink>
     </nav>
 
     <!-- Logout -->
-    <div class="px-3 py-4 border-t border-white/10">
+    <div class="px-2.5 py-3 border-t border-white/10">
       <button
-        class="w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-white/60 hover:bg-white/15 hover:text-white transition-colors"
+        class="w-full flex items-center gap-2 px-2.5 py-1.5 rounded-md text-sm text-white/60 hover:bg-white/15 hover:text-white transition-colors"
         @click="logout"
       >
         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">

@@ -8,6 +8,7 @@ export interface CartItem {
   price: number
   priceDisplay: string
   quantity: number
+  stock?: number
   image?: string
   icon?: string
 }
@@ -31,11 +32,12 @@ export function useCart() {
     () => `R$ ${totalPrice.value.toFixed(2).replace('.', ',')}`,
   )
 
-  // ─── Adiciona item (incrementa se já existir) ───
+  // ─── Adiciona item (incrementa se já existir, respeitando stock) ───
   function addItem(item: Omit<CartItem, 'quantity'>) {
     const existing = items.value.find((i) => i.id === item.id)
     if (existing) {
-      existing.quantity++
+      const limit = existing.stock ?? Infinity
+      if (existing.quantity < limit) existing.quantity++
     } else {
       items.value = [...items.value, { ...item, quantity: 1 }]
     }

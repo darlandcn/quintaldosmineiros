@@ -26,6 +26,9 @@ export interface Order {
   amount: string
   status: OrderStatus
   email?: string
+  phone?: string
+  address?: string
+  notes?: string
   payment?: string
   details?: OrderDetails
 }
@@ -96,7 +99,7 @@ export function useOrders() {
     try {
       const { data, error: err } = await supabase
         .from('orders')
-        .select('id, customer_name, created_at, total_price, status')
+        .select('id, customer_name, customer_email, customer_phone, customer_address, notes, created_at, total_price, status')
         .order('created_at', { ascending: false })
       if (err) throw err
       orders.value = (data ?? []).map(o => ({
@@ -105,7 +108,11 @@ export function useOrders() {
         client: o.customer_name ?? '—',
         date: formatDate(o.created_at),
         amount: formatBRL(Number(o.total_price) || 0),
-        status: o.status as OrderStatus,
+        status: (['pending', 'paid', 'shipped', 'cancelled'].includes(o.status) ? o.status : 'pending') as OrderStatus,
+        email: o.customer_email ?? undefined,
+        phone: o.customer_phone ?? undefined,
+        address: o.customer_address ?? undefined,
+        notes: o.notes ?? undefined,
       }))
     } catch (e: any) {
       fetchError.value = e?.message ?? 'Erro ao buscar pedidos'

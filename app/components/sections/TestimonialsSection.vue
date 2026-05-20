@@ -43,9 +43,6 @@ const { testimonials } = useTestimonials()
             aria-hidden="true"
           >★</span>
         </div>
-        <p class="font-display italic text-lg text-[#7A6355]">
-          Avaliação 5.0 com mais de 500 avaliações verificadas
-        </p>
       </div>
     </div>
   </section>

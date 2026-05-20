@@ -1,9 +1,9 @@
 <template>
   <span
     class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold"
-    :class="statusClass[status]"
+    :class="statusClass[status] ?? 'bg-zinc-100 text-zinc-500'"
   >
-    {{ statusLabel[status] }}
+    {{ statusLabel[status] ?? status ?? '—' }}
   </span>
 </template>
 

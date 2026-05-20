@@ -1,14 +1,14 @@
 <template>
-  <div class="bg-white rounded-xl border border-[#2F5946]/20 px-6 py-4 flex flex-col gap-4 h-full min-h-0 justify-between">
+  <div class="bg-white rounded-xl border border-[#2F5946]/20 px-5 py-3 flex flex-col gap-3 h-full min-h-0 justify-between">
 
     <!-- Header -->
     <div class="space-y-0.5">
       <p class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest leading-none">Pedidos</p>
-      <p class="text-base font-bold text-gray-900 leading-none">Status atual</p>
+      <p class="text-sm font-bold text-gray-900 leading-none">Status atual</p>
     </div>
 
     <!-- Skeleton -->
-    <div v-if="loading" class="flex flex-col gap-4 animate-pulse">
+    <div v-if="loading" class="flex flex-col gap-3 animate-pulse">
       <div v-for="i in 3" :key="i" class="flex flex-col gap-1.5">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
@@ -22,7 +22,7 @@
     </div>
 
     <!-- Status list -->
-    <div v-else class="flex flex-col gap-4">
+    <div v-else class="flex flex-col gap-3">
       <div v-for="s in statuses" :key="s.label" class="flex flex-col gap-1.5">
 
         <div class="flex items-center justify-between">

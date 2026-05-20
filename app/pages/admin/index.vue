@@ -1,24 +1,23 @@
 <template>
-  <div class="flex flex-col h-full min-h-0">
+  <div class="flex flex-col">
 
     <!-- Page Header -->
-    <div class="shrink-0 bg-white border-b border-[#2F5946]/20 px-10 py-5">
+    <div class="sticky top-0 z-10 bg-white border-b border-[#2F5946]/20 px-8 py-4">
       <div class="space-y-0.5">
-        <h1 class="text-2xl font-bold text-gray-900 tracking-tight leading-none">Dashboard</h1>
-        <p class="text-sm text-gray-400 font-normal">Visão geral do seu negócio</p>
+        <h1 class="text-xl font-bold text-gray-900 tracking-tight leading-none">Dashboard</h1>
+        <p class="text-xs text-gray-400 font-normal">Visão geral do seu negócio</p>
       </div>
     </div>
 
-    <!-- Page Body: flex column, sem scroll global -->
-    <div class="flex-1 min-h-0 flex flex-col gap-3 px-6 py-4 overflow-hidden">
+    <!-- Page Body -->
+    <div class="flex flex-col gap-2.5 px-4 sm:px-6 py-3">
 
-      <!-- Linha 1: Metric Cards (altura fixa) -->
-      <div class="shrink-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+      <!-- Linha 1: Metric Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
         <MetricCard
           label="Receita total"
           :loading="revenueLoading"
           :value="revenueError ? 'Erro' : formattedRevenue"
-          :trend="revenueTrend"
         >
           <template #icon>
             <svg class="w-5 h-5 text-[#2F5946]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
@@ -44,7 +43,6 @@
           :loading="totalOrdersLoading"
           :value="totalOrdersError ? 'Erro' : String(thisMonthOrders)"
           :trend="totalOrdersTrend"
-          :subtext="`${totalOrdersHistoric} pedidos totais`"
         >
           <template #icon>
             <svg class="w-5 h-5 text-[#2F5946]" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
@@ -66,23 +64,23 @@
         </MetricCard>
       </div>
 
-      <!-- Linha 2: Gráfico + Status (cresce proporcionalmente) -->
-      <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-3 gap-3">
-        <div class="lg:col-span-2 min-h-0">
-          <SalesChart class="h-full" />
+      <!-- Linha 2: Gráfico + Status -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-2.5">
+        <div class="lg:col-span-2">
+          <SalesChart class="min-h-[240px]" />
         </div>
-        <div class="lg:col-span-1 min-h-0">
-          <OrderStatusCard :statuses="orderStatuses" :loading="totalOrdersLoading" class="h-full" />
+        <div class="lg:col-span-1">
+          <OrderStatusCard :statuses="orderStatuses" :loading="totalOrdersLoading" class="min-h-[200px]" />
         </div>
       </div>
 
-      <!-- Linha 3: Pedidos + Top Produtos (cresce proporcionalmente) -->
-      <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-5 gap-3">
-        <div class="lg:col-span-3 min-h-0">
-          <RecentOrdersTable class="h-full" />
+      <!-- Linha 3: Pedidos + Top Produtos -->
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-2.5">
+        <div class="lg:col-span-3">
+          <RecentOrdersTable />
         </div>
-        <div class="lg:col-span-2 min-h-0">
-          <TopProductsCard class="h-full" />
+        <div class="lg:col-span-2">
+          <TopProductsCard />
         </div>
       </div>
 
