@@ -2,13 +2,12 @@
   <div class="flex flex-col gap-3">
 
     <!-- Imagem principal -->
-    <div class="relative overflow-hidden aspect-square bg-[#F5EFE6] border border-[#2F5946]/20">
+    <div class="relative overflow-hidden rounded-2xl aspect-square bg-[#F5EFE6] border border-[#E7D7BC]/60 shadow-sm">
       <img
         :src="activeImage || '/images/placeholder.jpg'"
         :alt="name"
-        class="w-full h-full object-cover transition-opacity duration-300"
+        class="w-full h-full object-cover transition-all duration-500"
       />
-      <div class="absolute inset-0 bg-gradient-to-t from-[#2C1810]/20 via-transparent to-transparent pointer-events-none" />
     </div>
 
     <!-- Miniaturas -->
@@ -16,10 +15,10 @@
       <button
         v-for="(img, i) in images"
         :key="i"
-        class="shrink-0 w-16 h-16 overflow-hidden border-2 transition-all duration-200"
+        class="shrink-0 w-[72px] h-[72px] overflow-hidden rounded-xl border-2 transition-all duration-200"
         :class="activeIndex === i
-          ? 'border-[#2F5946]'
-          : 'border-[#2F5946]/20 hover:border-[#2F5946]/50'"
+          ? 'border-[#2F5946] shadow-sm ring-2 ring-[#2F5946]/10'
+          : 'border-[#E7D7BC] hover:border-[#2F5946]/40'"
         @click="activeIndex = i"
       >
         <img :src="img" :alt="`${name} ${i + 1}`" class="w-full h-full object-cover" />

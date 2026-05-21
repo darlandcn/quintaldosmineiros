@@ -32,19 +32,11 @@ useSeoMeta({
       <!-- "O melhor de Minas na sua mesa" com CTA para cestas -->
       <HeroSection />
 
-      <!-- 2. Kits em Destaque — foco comercial principal -->
-      <!-- Grade editorial de kits curados com preço e CTA -->
-      <KitsSection />
-
-<!-- 3. Catálogo de Produtos — exploração curada -->
+      <!-- 2. Catálogo de Produtos — exploração curada -->
       <!-- Filtro por categoria + grade de produtos artesanais -->
       <CatalogSection />
 
-      <!-- 4. Monte sua Cesta — personalização interativa -->
-      <!-- Seletor de itens + painel de resumo + CTA WhatsApp -->
-      <BuildKitSection />
-
-      <!-- 5. Nossa História — narrativa emocional da marca -->
+      <!-- 4. Nossa História — narrativa emocional da marca -->
       <!-- Origem, valores, pilares e imagem editorial -->
       <BrandStorySection />
 
@@ -52,9 +44,6 @@ useSeoMeta({
       <!-- Cartões de clientes reais com avaliação e ocasião -->
       <TestimonialsSection />
 
-      <!-- 7. CTA Final — convite pessoal e acolhedor -->
-      <!-- "Pronto para provar o sabor de Minas?" -->
-      <CtaSection />
     </main>
 
     <!-- ─── Rodapé Global ─── -->

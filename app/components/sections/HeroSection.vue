@@ -52,7 +52,7 @@ onMounted(() => {
       </div>
 
       <!-- Subheadline fixa -->
-      <p class="font-subheadline text-white/90 text-[1.05rem] md:text-lg
+      <p class="font-body text-white/90 text-[1.05rem] md:text-lg
                 font-light leading-relaxed tracking-wide max-w-md mb-8
                 text-hero-shadow -mt-4">
         Queijos artesanais, cafés especiais e sabores preparados para
@@ -63,18 +63,18 @@ onMounted(() => {
       <div class="flex flex-col sm:flex-row gap-3">
         <a
           href="#kits"
-          class="inline-flex items-center justify-center px-8 py-3.5
+          class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl
                  bg-[#2F5946] hover:bg-[#254637] text-white
-                 font-subheadline text-xs font-semibold tracking-[0.15em] uppercase
+                 font-body text-xs font-semibold tracking-[0.15em] uppercase
                  transition-all duration-300 border border-[#2F5946] hover:border-[#254637]"
         >
           Escolher meu kit
         </a>
         <a
           href="#produtos"
-          class="inline-flex items-center justify-center px-8 py-3.5
+          class="inline-flex items-center justify-center px-8 py-3.5 rounded-xl
                  bg-transparent hover:bg-white/10 text-white
-                 font-subheadline text-xs font-semibold tracking-[0.15em] uppercase
+                 font-body text-xs font-semibold tracking-[0.15em] uppercase
                  transition-all duration-300 border border-white/40 hover:border-white/70"
         >
           Ver sabores favoritos

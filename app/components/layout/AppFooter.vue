@@ -3,26 +3,30 @@ const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="bg-[#2F5946] text-[#E7D7BC]">
+  <footer id="footer" class="bg-[#2F5946] text-[#E7D7BC]">
 
     <!-- ─── Corpo Principal ─── -->
-    <div class="max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-12">
-      <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-16 md:gap-12 lg:gap-20">
+    <div class="relative max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-12">
+
+      <!-- Passarinho decorativo centralizado -->
+      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <img
+          src="/images/logo_passarinho_2.png"
+          alt=""
+          class="h-60 w-60 object-contain opacity-[0.06]"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div class="relative grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-16 md:gap-12 lg:gap-20 md:items-center">
 
         <!-- ─── Coluna 1: Marca ─── -->
         <div class="flex flex-col gap-6">
-          <div class="flex flex-col items-start">
-            <img
-              src="/images/logo_passarinho_2.png"
-              alt="Quintal dos Mineiros"
-              class="h-[48px] w-[48px] object-contain"
-            />
-            <img
-              src="/images/logo_nome_2.png"
-              alt="Quintal dos Mineiros"
-              class="h-[44px] object-contain -mt-1"
-            />
-          </div>
+          <img
+            src="/images/logo_nome_2.png"
+            alt="Quintal dos Mineiros"
+            class="h-[44px] w-auto object-contain self-start"
+          />
           <p class="font-body text-sm text-[#E7D7BC]/60 leading-relaxed max-w-xs">
             Produtos artesanais selecionados diretamente de produtores de Minas Gerais.
             Autenticidade, qualidade e sabor genuíno desde a origem até sua mesa.
@@ -33,35 +37,20 @@ const year = new Date().getFullYear()
           </p>
         </div>
 
-        <!-- ─── Coluna 2: Navegação ─── -->
+        <!-- ─── Coluna 2: Informações ─── -->
         <div class="flex flex-col gap-6">
           <h4 class="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-[#E7D7BC]/35">
-            Navegação
+            Informações
           </h4>
           <nav class="flex flex-col gap-3">
-            <NuxtLink
-              to="/"
-              class="font-body text-sm text-[#E7D7BC]/65 hover:text-[#E7D7BC] transition-colors duration-200"
-            >
-              Home
-            </NuxtLink>
-            <a
-              href="/#produtos"
-              class="font-body text-sm text-[#E7D7BC]/65 hover:text-[#E7D7BC] transition-colors duration-200"
-            >
-              Catálogo
+            <a href="#" class="font-body text-sm text-[#E7D7BC]/65 hover:text-[#E7D7BC] transition-colors duration-200">
+              Envios e Entregas
             </a>
-            <a
-              href="/#kits"
-              class="font-body text-sm text-[#E7D7BC]/65 hover:text-[#E7D7BC] transition-colors duration-200"
-            >
-              Kits
+            <a href="#" class="font-body text-sm text-[#E7D7BC]/65 hover:text-[#E7D7BC] transition-colors duration-200">
+              Trocas e Devoluções
             </a>
-            <a
-              href="/#historia"
-              class="font-body text-sm text-[#E7D7BC]/65 hover:text-[#E7D7BC] transition-colors duration-200"
-            >
-              Sobre
+            <a href="#" class="font-body text-sm text-[#E7D7BC]/65 hover:text-[#E7D7BC] transition-colors duration-200">
+              Formas de Pagamento
             </a>
           </nav>
         </div>
@@ -113,19 +102,12 @@ const year = new Date().getFullYear()
               <span class="font-body text-sm">contato@quintaldosmineiros.com.br</span>
             </a>
 
-            <!-- Localização -->
-            <div class="flex items-center gap-3 text-[#E7D7BC]/40">
-              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              <span class="font-body text-sm">Minas Gerais, Brasil</span>
-            </div>
 
           </div>
         </div>
 
       </div>
+
     </div>
 
     <!-- ─── Barra inferior ─── -->

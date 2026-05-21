@@ -8,11 +8,11 @@ defineProps<{ product: Product }>()
   <NuxtLink
     :to="`/produto/${product.id}`"
     class="group relative overflow-hidden card-hover cursor-pointer flex flex-col bg-white border
-           border-[#2F5946]/50 shadow-xl shadow-[#2F5946]/10"
+           border-[#2F5946]/30 shadow-sm rounded-2xl"
   >
 
     <!-- ─── Imagem do Produto ─── -->
-    <div class="relative overflow-hidden flex-shrink-0 aspect-square">
+    <div class="relative overflow-hidden flex-shrink-0 aspect-square rounded-t-2xl">
       <img
         :src="product.image"
         :alt="product.name"
@@ -36,14 +36,14 @@ defineProps<{ product: Product }>()
       </h3>
 
       <!-- ─── Preço e CTA ─── -->
-      <div class="mt-5 pt-5 border-t border-[#E7D7BC]/60 flex items-center justify-between gap-4">
+      <div class="mt-5 flex flex-col gap-6">
         <p class="font-display font-bold text-lg text-[#2F5946] leading-none">
           {{ product.price }}
         </p>
         <span
-          class="flex-shrink-0 px-6 py-3 font-body font-semibold text-sm
-                 transition-all duration-300
-                 bg-[#2F5946] text-white group-hover:bg-[#254637] shadow-md group-hover:shadow-lg"
+          class="w-full text-center px-6 py-3 rounded-xl font-subheadline font-semibold text-xs tracking-[0.15em] uppercase
+                 border border-[#2F5946] text-[#2F5946] bg-white
+                 transition-all duration-300 group-hover:bg-[#2F5946]/5"
         >
           Ver Produto
         </span>

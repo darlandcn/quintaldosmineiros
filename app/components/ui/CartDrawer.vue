@@ -46,7 +46,10 @@ function goToCheckout() {
         <!-- ─── Cabeçalho do Drawer ─── -->
         <div class="flex items-center justify-between px-6 py-5 border-b border-[#E7D7BC]/60">
           <div class="flex items-center gap-3">
-            <span class="text-2xl" aria-hidden="true">🧺</span>
+            <svg class="w-6 h-6 text-[#2F5946]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/>
+              <path d="M8 11V6a4 4 0 0 1 8 0v5"/>
+            </svg>
             <div>
               <h2 class="font-display font-bold text-[#2C1810] text-xl leading-none">
                 Minha Cesta
@@ -76,16 +79,16 @@ function goToCheckout() {
             v-if="items.length === 0"
             class="flex flex-col items-center justify-center h-full gap-4 text-center py-16"
           >
-            <span class="text-5xl opacity-30" aria-hidden="true">🧺</span>
             <p class="font-body text-[#7A6355] text-sm leading-relaxed">
               Sua cesta está vazia.<br />Adicione produtos para começar.
             </p>
-            <button
+            <a
+              href="#produtos"
               @click="isOpen = false"
               class="font-body text-sm font-semibold text-[#2F5946] hover:underline"
             >
               Ver produtos →
-            </button>
+            </a>
           </div>
 
           <!-- Itens adicionados -->

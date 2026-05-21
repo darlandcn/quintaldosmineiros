@@ -1,49 +1,33 @@
 <template>
-  <div class="flex flex-col gap-6">
+  <div class="flex flex-col gap-5">
 
-    <!-- Badge -->
-    <span
-      v-if="product.badge"
-      class="self-start px-3 py-1 text-xs font-semibold font-body tracking-widest uppercase bg-[#2F5946]/10 text-[#2F5946]"
-    >
-      {{ product.badge }}
-    </span>
-
-    <!-- Nome e origem -->
-    <div>
-      <h1 class="font-display font-bold text-3xl md:text-4xl text-[#2C1810] leading-snug">
-        {{ product.name }}
-      </h1>
-      <p v-if="product.origin" class="mt-1 font-body text-sm text-[#2F5946]/70 tracking-wide">
-        {{ product.origin }}
-      </p>
+    <!-- Estrelas + avaliações -->
+    <div class="flex items-center gap-2">
+      <div class="flex items-center gap-0.5">
+        <svg v-for="i in 5" :key="i" class="w-4 h-4 text-[#C9A46A]" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <span class="font-body text-xs text-[#9A8070]">4.9 · 127 avaliações</span>
     </div>
+
+    <!-- Nome do produto -->
+    <h1 class="font-display font-bold text-3xl md:text-4xl text-[#2C1810] leading-tight">
+      {{ product.name }}
+    </h1>
 
     <!-- Preço -->
-    <p class="font-display font-bold text-3xl text-[#2F5946] leading-none">
-      {{ product.priceDisplay }}
-    </p>
+    <div class="flex flex-col gap-0.5">
+      <p class="font-body text-[11px] font-semibold text-[#9A8070] tracking-widest uppercase">Preço</p>
+      <p class="font-display font-bold text-4xl text-[#2F5946] leading-none">
+        {{ product.priceDisplay }}
+      </p>
+    </div>
 
-    <!-- Descrição -->
-    <p class="font-body text-base text-[#3D2B1F]/80 leading-relaxed border-t border-[#E7D7BC] pt-5">
+    <!-- Descrição curta -->
+    <p class="font-body text-base text-[#3D2B1F]/75 leading-relaxed border-t border-[#E7D7BC]/80 pt-5">
       {{ product.description }}
     </p>
-
-    <!-- Características -->
-    <div v-if="product.characteristics?.length" class="border-t border-[#E7D7BC] pt-5">
-      <p class="font-body text-xs font-semibold text-[#2F5946] tracking-[0.15em] uppercase mb-3">
-        Características
-      </p>
-      <ul class="flex flex-col gap-2">
-        <li
-          v-for="item in product.characteristics"
-          :key="item"
-          class="font-body text-sm text-[#3D2B1F]"
-        >
-          {{ item }}
-        </li>
-      </ul>
-    </div>
 
   </div>
 </template>

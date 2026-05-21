@@ -1,7 +1,8 @@
 <template>
-  <div class="flex items-center gap-4 py-4">
+  <div class="flex items-center gap-3 py-3.5">
+
     <!-- Imagem -->
-    <div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-[#F5EFE6] border border-[#E7D7BC]/60">
+    <div class="w-[60px] h-[60px] flex-shrink-0 rounded-xl overflow-hidden bg-[#F5EFE6] border border-[#E7D7BC]/60">
       <img
         v-if="item.image"
         :src="item.image"
@@ -15,23 +16,19 @@
 
     <!-- Info -->
     <div class="flex-1 min-w-0">
-      <p class="font-body text-sm font-medium text-[#2C1810] leading-snug truncate">
+      <p class="font-body text-sm font-semibold text-[#2C1810] leading-snug">
         {{ item.name }}
       </p>
-      <p class="font-body text-xs text-[#7A6355] mt-0.5">
+      <p class="font-body text-xs text-[#9A8070] mt-1">
         Qtd: {{ item.quantity }}
       </p>
     </div>
 
-    <!-- Preço -->
-    <div class="text-right flex-shrink-0">
-      <p class="font-body text-sm font-semibold text-[#2F5946]">
-        {{ itemTotalDisplay }}
-      </p>
-      <p v-if="item.quantity > 1" class="font-body text-xs text-[#7A6355] mt-0.5">
-        {{ item.priceDisplay }} / un
-      </p>
-    </div>
+    <!-- Preço total -->
+    <p class="font-body text-sm font-semibold text-[#2C1810] flex-shrink-0">
+      {{ itemTotalDisplay }}
+    </p>
+
   </div>
 </template>
 

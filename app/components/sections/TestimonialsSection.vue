@@ -9,7 +9,7 @@ const { testimonials } = useTestimonials()
 
 <template>
   <!-- Seção de depoimentos — fundo creme quente -->
-  <section id="depoimentos" class="bg-[#FAF6EE] py-14 md:py-20">
+  <section id="depoimentos" class="bg-[#F3EBDD] py-14 md:py-20">
     <div class="max-w-7xl mx-auto px-5 md:px-8">
 
       <!-- ─── Cabeçalho da Seção ─── -->

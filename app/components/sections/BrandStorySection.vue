@@ -11,7 +11,7 @@ const highlights = [
 
 <template>
   <!-- Seção de história da marca — fundo creme quente e atmosfera acolhedora -->
-  <section id="historia" class="bg-[#F3EBDD] py-14 md:py-20 overflow-hidden">
+  <section id="historia" class="bg-[#FAF6EE] py-14 md:py-20 overflow-hidden">
     <div class="max-w-7xl mx-auto px-5 md:px-8">
 
       <!-- ─── Layout de Duas Colunas ─── -->
@@ -74,9 +74,7 @@ const highlights = [
 
           <!-- CTA textual -->
           <a
-            href="https://wa.me/5531999999999?text=Olá! Quero conhecer mais sobre o Quintal dos Mineiros."
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#produtos"
             class="font-body text-sm font-semibold text-[#2F5946] hover:text-[#254637] transition-colors duration-200 inline-flex items-center gap-1"
           >
             Explorar nossa curadoria →
