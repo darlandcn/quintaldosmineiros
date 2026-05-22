@@ -24,10 +24,19 @@
       </p>
     </div>
 
-    <!-- Descrição curta -->
-    <p class="font-body text-base text-[#3D2B1F]/75 leading-relaxed border-t border-[#E7D7BC]/80 pt-5">
-      {{ product.description }}
-    </p>
+    <!-- Descrição curta + ver mais -->
+    <div class="border-t border-[#E7D7BC]/80 pt-5 flex flex-col gap-3">
+      <p class="font-body text-base text-[#3D2B1F]/75 leading-relaxed">
+        {{ product.description }}
+      </p>
+      <button
+        class="group self-start font-body text-sm text-[#2F5946] relative"
+        @click="$emit('open-details')"
+      >
+        Ver mais...
+        <span class="absolute bottom-0 left-0 w-0 h-px bg-[#2F5946] transition-all duration-300 group-hover:w-full" />
+      </button>
+    </div>
 
   </div>
 </template>
@@ -37,5 +46,9 @@ import type { ProductDetail } from '~/composables/useProduct'
 
 defineProps<{
   product: ProductDetail
+}>()
+
+defineEmits<{
+  'open-details': []
 }>()
 </script>

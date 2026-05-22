@@ -53,13 +53,15 @@
 
             <!-- Coluna: informações + ações -->
             <div class="flex flex-col gap-8">
-              <ProductInfo :product="product" />
+              <ProductInfo :product="product" @open-details="showDetails = true" />
               <ProductActions :product="product" />
             </div>
 
           </div>
 
         </div>
+
+        <ProductDetailsModal v-model="showDetails" :product="product" />
 
         <!-- ─── Curadoria especial / Produtos relacionados ─── -->
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -111,6 +113,8 @@ const route = useRoute()
 const productId = route.params.slug as string
 
 const { product, loading, error, fetchProduct } = useProduct(productId)
+
+const showDetails = ref(false)
 
 const { products, fetchProducts: fetchSuggestions } = useProducts()
 const suggestions = computed(() =>
