@@ -32,7 +32,7 @@ useSeoMeta({
       <!-- "O melhor de Minas na sua mesa" com CTA para cestas -->
       <HeroSection />
 
-      <!-- 2. Catálogo de Produtos — exploração curada -->
+<!-- 2. Catálogo de Produtos — exploração curada -->
       <!-- Filtro por categoria + grade de produtos artesanais -->
       <CatalogSection />
 

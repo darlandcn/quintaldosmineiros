@@ -5,7 +5,6 @@
 
 // ─── Links de Navegação ───
 const navLinks = [
-  { label: 'Kits',            href: '#kits'     },
   { label: 'Produtos',        href: '#produtos'  },
   { label: 'Nossa História',  href: '#historia'  },
   { label: 'Contatos',        href: '#footer'    },
@@ -86,22 +85,49 @@ const searchOpen = ref(false)
       </a>
     </nav>
 
-    <!-- ─── Ações direita — desktop (lupa + cesta) ─── -->
+    <!-- ─── Ações direita — desktop (lupa + pedidos + cesta) ─── -->
     <div class="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center gap-3">
-      <button @click="searchOpen = true" class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200" aria-label="Pesquisar">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-      </button>
-      <button @click="cartOpen = true" class="relative p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200" aria-label="Abrir cesta de compras">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/>
-          <path d="M8 11V6a4 4 0 0 1 8 0v5"/>
-        </svg>
-        <span v-if="totalItems > 0" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-white text-[#2F5946] font-body font-bold text-[10px] rounded-full flex items-center justify-center leading-none">
-          {{ totalItems > 99 ? '99+' : totalItems }}
-        </span>
-      </button>
+
+      <AppTooltip label="Buscar">
+        <button
+          @click="searchOpen = true"
+          class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
+          aria-label="Buscar"
+        >
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+        </button>
+      </AppTooltip>
+
+      <AppTooltip label="Acompanhar pedido">
+        <NuxtLink
+          to="/meus-pedidos"
+          class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
+          aria-label="Acompanhar pedido"
+        >
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22V12"/><path d="M20.27 18.27 22 20"/><path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/><circle cx="18.5" cy="16.5" r="2.5"/>
+          </svg>
+        </NuxtLink>
+      </AppTooltip>
+
+      <AppTooltip label="Carrinho">
+        <button
+          @click="cartOpen = true"
+          class="relative p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
+          aria-label="Carrinho"
+        >
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/>
+            <path d="M8 11V6a4 4 0 0 1 8 0v5"/>
+          </svg>
+          <span v-if="totalItems > 0" class="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 bg-white text-[#2F5946] font-body font-bold text-[10px] rounded-full flex items-center justify-center leading-none">
+            {{ totalItems > 99 ? '99+' : totalItems }}
+          </span>
+        </button>
+      </AppTooltip>
+
     </div>
 
     <!-- ─── Hamburger — mobile sempre + desktop no compacto ─── -->
@@ -121,13 +147,18 @@ const searchOpen = ref(false)
       </button>
     </div>
 
-    <!-- ─── Ações direita — mobile (lupa + cesta, sempre visíveis) ─── -->
+    <!-- ─── Ações direita — mobile (lupa + pedidos + cesta, sempre visíveis) ─── -->
     <div class="absolute right-5 top-1/2 -translate-y-1/2 z-10 flex md:hidden items-center gap-1">
       <button @click="searchOpen = true" class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200" aria-label="Pesquisar">
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
       </button>
+      <NuxtLink to="/meus-pedidos" class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200" aria-label="Meus pedidos">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22V12"/><path d="M20.27 18.27 22 20"/><path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/><circle cx="18.5" cy="16.5" r="2.5"/>
+        </svg>
+      </NuxtLink>
       <button @click="cartOpen = true" class="relative p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200" aria-label="Abrir cesta de compras">
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M2.048 18.566A2 2 0 0 0 4 21h16a2 2 0 0 0 1.952-2.434l-2-9A2 2 0 0 0 18 8H6a2 2 0 0 0-1.952 1.566z"/>
