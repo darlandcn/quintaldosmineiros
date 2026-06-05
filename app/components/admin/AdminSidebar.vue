@@ -79,6 +79,19 @@
         </svg>
         Clientes
       </NuxtLink>
+
+      <NuxtLink
+        to="/admin/financeiro"
+        class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-sm transition-colors"
+        :class="isActive('/admin/financeiro')
+          ? 'bg-white/20 text-white'
+          : 'text-white/70 hover:bg-white/15 hover:text-white'"
+      >
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+        </svg>
+        Financeiro
+      </NuxtLink>
     </nav>
 
     <!-- Logout -->

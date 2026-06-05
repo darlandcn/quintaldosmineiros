@@ -88,7 +88,7 @@ const searchOpen = ref(false)
     <!-- ─── Ações direita — desktop (lupa + pedidos + cesta) ─── -->
     <div class="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center gap-3">
 
-      <AppTooltip label="Buscar">
+      <AppTooltip label="Buscar" position="below">
         <button
           @click="searchOpen = true"
           class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
@@ -100,7 +100,7 @@ const searchOpen = ref(false)
         </button>
       </AppTooltip>
 
-      <AppTooltip label="Acompanhar pedido">
+      <AppTooltip label="Acompanhar pedido" position="below">
         <NuxtLink
           to="/meus-pedidos"
           class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
@@ -112,7 +112,7 @@ const searchOpen = ref(false)
         </NuxtLink>
       </AppTooltip>
 
-      <AppTooltip label="Carrinho">
+      <AppTooltip label="Carrinho" position="below">
         <button
           @click="cartOpen = true"
           class="relative p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"

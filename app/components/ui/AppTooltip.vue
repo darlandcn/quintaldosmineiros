@@ -1,14 +1,45 @@
 <script setup lang="ts">
 // ─── AppTooltip Component ───
-// Tooltip elegante, apenas em dispositivos hover (desktop).
-// Aparece acima do elemento com fade + slide suave e delay de 150ms.
+// Tooltip elegante renderizado via Teleport no <body>.
+// Escapa de qualquer overflow:hidden do pai e sobrepõe todas as seções.
+// position="below" → abaixo do ícone (ideal para headers)
+// position="above" → acima do ícone (padrão geral)
 
-defineProps<{ label: string }>()
+const { label, position = 'above' } = defineProps<{
+  label: string
+  position?: 'above' | 'below'
+}>()
 
-const visible = ref(false)
+const visible    = ref(false)
+const triggerRef = ref<HTMLElement | null>(null)
+
+// Posição calculada em px para o tooltip teleportado (fixed)
+const tooltipStyle = ref<Record<string, string>>({})
+
 let delayTimer: ReturnType<typeof setTimeout> | null = null
 
+function updatePosition() {
+  if (!triggerRef.value) return
+  const rect    = triggerRef.value.getBoundingClientRect()
+  const centerX = rect.left + rect.width / 2
+
+  if (position === 'below') {
+    tooltipStyle.value = {
+      top:       `${rect.bottom + 10}px`,
+      left:      `${centerX}px`,
+      transform: 'translateX(-50%)',
+    }
+  } else {
+    tooltipStyle.value = {
+      top:       `${rect.top - 10}px`,
+      left:      `${centerX}px`,
+      transform: 'translateX(-50%) translateY(-100%)',
+    }
+  }
+}
+
 function show() {
+  updatePosition()
   delayTimer = setTimeout(() => { visible.value = true }, 150)
 }
 
@@ -19,35 +50,43 @@ function hide() {
 </script>
 
 <template>
-  <!-- Wrapper relativo — isola o tooltip do fluxo do pai -->
+  <!-- Trigger — apenas referência de posição -->
   <div
-    class="relative inline-flex items-center justify-center"
+    ref="triggerRef"
+    class="inline-flex items-center justify-center"
     @mouseenter="show"
     @mouseleave="hide"
     @focusin="show"
     @focusout="hide"
   >
     <slot />
+  </div>
 
-    <!-- Tooltip — visível apenas em hover devices (CSS @media) -->
+  <!-- Tooltip teleportado para o <body> — escapa de overflow:hidden -->
+  <Teleport to="body">
     <Transition
       enter-active-class="transition-all duration-200 ease-out"
-      enter-from-class="opacity-0 translate-y-1.5 scale-95"
+      :enter-from-class="position === 'below'
+        ? 'opacity-0 -translate-y-1.5 scale-95'
+        : 'opacity-0 translate-y-1.5 scale-95'"
       enter-to-class="opacity-100 translate-y-0 scale-100"
       leave-active-class="transition-all duration-150 ease-in"
       leave-from-class="opacity-100 translate-y-0 scale-100"
-      leave-to-class="opacity-0 translate-y-1.5 scale-95"
+      :leave-to-class="position === 'below'
+        ? 'opacity-0 -translate-y-1.5 scale-95'
+        : 'opacity-0 translate-y-1.5 scale-95'"
     >
       <div
         v-if="visible"
         role="tooltip"
+        :style="tooltipStyle"
         class="
-          absolute bottom-full left-1/2 -translate-x-1/2 mb-3
+          fixed z-[9999]
           pointer-events-none select-none
           [@media(hover:hover)]:block hidden
         "
       >
-        <!-- Bolha do tooltip -->
+        <!-- Bolha -->
         <div class="
           relative px-2.5 py-1.5
           bg-neutral-900/80 backdrop-blur-md
@@ -58,15 +97,16 @@ function hide() {
         ">
           {{ label }}
 
-          <!-- Setinha apontando para baixo -->
-          <span class="
-            absolute top-full left-1/2 -translate-x-1/2
-            border-[5px] border-transparent
-            border-t-neutral-900/80
-            -mt-px
-          " aria-hidden="true" />
+          <!-- Setinha -->
+          <span
+            class="absolute left-1/2 -translate-x-1/2 border-[5px] border-transparent"
+            :class="position === 'below'
+              ? 'bottom-full border-b-neutral-900/80 -mb-px'
+              : 'top-full border-t-neutral-900/80 -mt-px'"
+            aria-hidden="true"
+          />
         </div>
       </div>
     </Transition>
-  </div>
+  </Teleport>
 </template>
