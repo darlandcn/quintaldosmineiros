@@ -31,7 +31,7 @@ onMounted(() => {
 
     <!-- Conteúdo — posicionado no terço inferior (leitura cinematográfica) -->
     <div class="relative z-10 h-full flex flex-col justify-end
-                px-8 md:px-16 lg:px-24 pb-10 md:pb-14">
+                px-8 md:px-16 lg:px-24 pb-28 sm:pb-20 md:pb-14">
 
       <!-- Headline rotativa — container de altura fixa para evitar layout shift -->
       <div class="relative h-36 md:h-40 lg:h-48 mb-8">
