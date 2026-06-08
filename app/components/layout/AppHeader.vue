@@ -5,9 +5,9 @@
 
 // ─── Links de Navegação ───
 const navLinks = [
-  { label: 'Produtos',        href: '#produtos'  },
-  { label: 'Nossa História',  href: '#historia'  },
-  { label: 'Contatos',        href: '#footer'    },
+  { label: 'Produtos',        href: '/#produtos'  },
+  { label: 'Nossa História',  href: '/#historia'  },
+  { label: 'Contatos',        href: '/#footer'    },
 ]
 
 // ─── Detecção do Hero Section ───

@@ -30,93 +30,89 @@
             role="dialog"
             aria-modal="true"
             :aria-label="product?.name"
-            class="relative z-10 w-full max-w-[1100px] bg-[#F8F5EF] rounded-3xl shadow-2xl overflow-hidden"
+            class="relative z-10 w-full max-w-[900px] bg-[#F8F5EF] rounded-2xl shadow-2xl overflow-hidden"
           >
             <!-- Botão fechar -->
             <button
-              class="absolute top-4 right-4 z-20 w-8 h-8 flex items-center justify-center rounded-full bg-[#2C1810]/8 hover:bg-[#2C1810]/15 text-[#3D2B1F] transition-colors duration-200"
-              @click="$emit('update:modelValue', false)"
+              class="absolute top-3 right-3 z-20 w-7 h-7 flex items-center justify-center rounded-full bg-[#2C1810]/8 hover:bg-[#2C1810]/15 text-[#3D2B1F] transition-colors duration-200"
               aria-label="Fechar"
+              @click="$emit('update:modelValue', false)"
             >
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <div class="p-6 sm:p-8 lg:p-10">
+            <div class="p-5 sm:p-7 lg:p-8">
 
-              <!-- ─── SEÇÃO HERO: título + benefícios ─── -->
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-5">
+              <!-- ─── HERO: título + benefícios ─── -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8 mb-4">
 
-                <!-- Lado esquerdo: título editorial -->
-                <div class="flex flex-col justify-center gap-3">
-                  <p class="font-body text-[10px] font-semibold text-[#2F5946] tracking-[0.18em] uppercase">
+                <!-- Título -->
+                <div class="flex flex-col justify-center gap-2">
+                  <p class="font-body text-[9px] font-semibold text-[#2F5946] tracking-[0.18em] uppercase">
                     Quintal dos Mineiros · Curadoria Especial
                   </p>
-
-                  <h2 class="font-display font-bold text-3xl sm:text-4xl text-[#2C1810] leading-[1.1]">
+                  <h2 class="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-[#2C1810] leading-[1.15]">
                     Torresmo Crocante em 5 Minutos.<br>
                     <span class="text-[#8C3B2A]">Sem Estouros. Sem Sujeira.</span>
                   </h2>
-
-                  <p class="font-body text-sm text-[#3D2B1F]/80 leading-relaxed">
-                    A crocância de Minas na sua casa com a praticidade que faltava. Nossa curadoria encontrou uma receita de família muito especial — você só faz a melhor parte: a pururuca perfeita, com total segurança.
+                  <p class="font-body text-xs text-[#3D2B1F]/80 leading-relaxed">
+                    A crocância de Minas na sua casa com a praticidade que faltava. Você só faz a melhor parte: a pururuca perfeita, com total segurança.
                   </p>
                 </div>
 
-                <!-- Lado direito: benefícios -->
-                <div class="flex flex-col gap-3 justify-center">
-
+                <!-- Benefícios -->
+                <div class="flex flex-col gap-2 justify-center">
                   <div
                     v-for="benefit in benefits"
                     :key="benefit.title"
-                    class="flex items-center gap-3 p-3.5 rounded-xl bg-[#F3EBDD]/60 border border-[#E7D7BC]/50"
+                    class="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#F3EBDD]/60 border border-[#E7D7BC]/50"
                   >
-                    <div class="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-[#E7D7BC]">
-                      <svg class="w-4 h-4 text-[#2F5946]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <div class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-[#E7D7BC]">
+                      <svg class="w-3.5 h-3.5 text-[#2F5946]" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                         <path v-for="(d, i) in benefit.paths" :key="i" :d="d" stroke-linecap="round" stroke-linejoin="round" />
                         <circle v-if="benefit.circle" cx="12" cy="12" r="10" />
                       </svg>
                     </div>
                     <div>
-                      <p class="font-body text-[10px] font-bold text-[#2F5946] tracking-widest uppercase">{{ benefit.title }}</p>
-                      <p class="font-body text-xs text-[#3D2B1F]/70 mt-0.5">{{ benefit.desc }}</p>
+                      <p class="font-body text-[9px] font-bold text-[#2F5946] tracking-widest uppercase">{{ benefit.title }}</p>
+                      <p class="font-body text-[11px] text-[#3D2B1F]/70 mt-0.5">{{ benefit.desc }}</p>
                     </div>
                   </div>
-
                 </div>
               </div>
 
               <!-- ─── DIVIDER ─── -->
-              <div class="relative flex items-center gap-4 mb-5">
+              <div class="relative flex items-center gap-4 mb-4">
                 <div class="flex-1 h-px bg-gradient-to-r from-transparent via-[#E7D7BC] to-transparent" />
                 <div class="w-1.5 h-1.5 rounded-full bg-[#D88A1C] shrink-0" />
                 <div class="flex-1 h-px bg-gradient-to-r from-transparent via-[#E7D7BC] to-transparent" />
               </div>
 
-              <!-- ─── SEÇÃO: Ocasiões ─── -->
+              <!-- ─── Ocasiões ─── -->
               <div>
-                <p class="font-display font-bold text-xl text-[#2C1810] text-center mb-4">
+                <p class="font-display font-bold text-base sm:text-lg text-[#2C1810] text-center mb-3">
                   Perfeito para Todas as Ocasiões:
                 </p>
 
-                <div class="grid grid-cols-3 gap-3">
+                <div class="grid grid-cols-3 gap-2.5">
                   <div
                     v-for="occasion in occasions"
                     :key="occasion.title"
-                    class="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/70 border border-[#E7D7BC]/60 text-center hover:-translate-y-0.5 transition-transform duration-200"
+                    class="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/70 border border-[#E7D7BC]/60 text-center"
                   >
-                    <div class="w-9 h-9 flex items-center justify-center rounded-full bg-[#F3EBDD] border border-[#E7D7BC]">
-                      <svg class="w-4.5 h-4.5 text-[#2F5946]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+                    <div class="w-8 h-8 flex items-center justify-center rounded-full bg-[#F3EBDD] border border-[#E7D7BC]">
+                      <svg class="w-3.5 h-3.5 text-[#2F5946]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
                         <path v-for="(d, i) in occasion.paths" :key="i" :d="d" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
                     </div>
-                    <p class="font-body text-[10px] font-bold text-[#2F5946] tracking-widest uppercase">{{ occasion.title }}</p>
-                    <p class="font-body text-xs text-[#3D2B1F]/70 leading-snug">{{ occasion.desc }}</p>
+                    <p class="font-body text-[9px] font-bold text-[#2F5946] tracking-widest uppercase">{{ occasion.title }}</p>
+                    <p class="font-body text-[11px] text-[#3D2B1F]/70 leading-snug">{{ occasion.desc }}</p>
                   </div>
                 </div>
 
-                <p class="mt-4 font-body text-[11px] text-[#7A6355] text-center">
+                <p class="mt-3 font-body text-[10px] text-[#7A6355] text-center">
                   Snack naturalmente <strong class="font-semibold text-[#3D2B1F]">rico em creatina e proteínas</strong>, em especial o colágeno
                 </p>
               </div>

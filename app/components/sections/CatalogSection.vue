@@ -20,7 +20,7 @@ onMounted(fetchProducts)
       </div>
 
       <!-- ─── Loading ─── -->
-      <div v-if="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div v-if="loading" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <div
           v-for="i in 8"
           :key="i"
@@ -51,7 +51,7 @@ onMounted(fetchProducts)
 
       <!-- ─── Grade de Produtos ─── -->
       <template v-else>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           <ProductCard
             v-for="product in products"
             :key="product.id"

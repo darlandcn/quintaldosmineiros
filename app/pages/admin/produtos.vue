@@ -338,9 +338,11 @@
     <ConfirmDialog
       v-if="productToDelete"
       :title="`Excluir &quot;${productToDelete.name}&quot;?`"
-      description="Esta ação não pode ser desfeita."
+      :description="deleteError || 'Esta ação não pode ser desfeita.'"
+      :loading="deleting"
+      :error="!!deleteError"
       @confirm="handleDelete"
-      @cancel="productToDelete = null"
+      @cancel="productToDelete = null; deleteError = ''"
     />
   </div>
 </template>
@@ -391,6 +393,8 @@ watch([search, stockFilter], () => { currentPage.value = 1 })
 const showForm = ref(false)
 const selectedProduct = ref<AdminProduct | null>(null)
 const productToDelete = ref<AdminProduct | null>(null)
+const deleting = ref(false)
+const deleteError = ref('')
 
 function openCreate() {
   selectedProduct.value = null
@@ -418,9 +422,17 @@ function confirmDelete(product: AdminProduct) {
 
 async function handleDelete() {
   if (!productToDelete.value) return
-  await deleteProduct(productToDelete.value.id)
-  productToDelete.value = null
-  await fetchProducts()
+  deleting.value = true
+  deleteError.value = ''
+  try {
+    await deleteProduct(productToDelete.value.id)
+    productToDelete.value = null
+    await fetchProducts()
+  } catch (e: any) {
+    deleteError.value = e?.message ?? 'Erro ao excluir produto.'
+  } finally {
+    deleting.value = false
+  }
 }
 
 function formatPrice(value: number) {

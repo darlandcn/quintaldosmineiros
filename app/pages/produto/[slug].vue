@@ -32,18 +32,18 @@
         <!-- Wrapper com max-width -->
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <!-- Breadcrumb -->
-          <nav class="py-5 flex items-center gap-2 font-body text-xs text-[#9A8070]">
-            <NuxtLink to="/" class="hover:text-[#2F5946] transition-colors duration-200">Início</NuxtLink>
-            <svg class="w-3 h-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-            <NuxtLink to="/#produtos" class="hover:text-[#2F5946] transition-colors duration-200">Produtos</NuxtLink>
-            <svg class="w-3 h-3 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-            <span class="text-[#2C1810] font-medium truncate max-w-[180px] sm:max-w-none">{{ product.name }}</span>
-          </nav>
+          <!-- Voltar -->
+          <div class="py-5">
+            <NuxtLink
+              to="/#produtos"
+              class="inline-flex items-center gap-1.5 font-body text-xs text-[#9A8070] hover:text-[#2F5946] transition-colors duration-200"
+            >
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+              Voltar
+            </NuxtLink>
+          </div>
 
           <!-- ─── Grid principal: galeria + info ─── -->
           <div class="grid grid-cols-1 lg:grid-cols-[1fr_480px] gap-10 lg:gap-16 pb-16 border-b border-[#E7D7BC]">

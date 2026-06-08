@@ -69,6 +69,16 @@ export function useAdminProducts() {
 
   async function deleteProduct(id: number) {
     const supabase = useSupabase()
+
+    const { count } = await supabase
+      .from('order_items')
+      .select('id', { count: 'exact', head: true })
+      .eq('product_id', id)
+
+    if (count && count > 0) {
+      throw new Error(`Este produto está vinculado a ${count} pedido${count > 1 ? 's' : ''} e não pode ser excluído.`)
+    }
+
     const { error: err } = await supabase.from('products').delete().eq('id', id)
     if (err) throw new Error(err.message)
   }
