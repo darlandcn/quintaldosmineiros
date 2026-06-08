@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-48 h-screen bg-[#2F5946] text-white flex flex-col shrink-0">
+  <aside class="hidden md:flex w-48 h-screen bg-[#2F5946] text-white flex-col shrink-0">
 
     <!-- Brand -->
     <div class="px-4 py-4 border-b border-white/10 flex items-center justify-center gap-0">

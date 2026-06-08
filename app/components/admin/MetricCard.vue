@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-xl border border-[#2F5946]/20 px-4 py-3 h-[76px] flex items-center gap-3">
+  <div class="bg-white rounded-xl border border-[#2F5946]/20 px-4 py-5 sm:py-3 sm:h-[76px] flex items-center gap-3">
 
     <!-- Icon -->
     <div class="w-8 h-8 rounded-lg bg-[#2F5946]/10 flex items-center justify-center shrink-0">

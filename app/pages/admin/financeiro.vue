@@ -42,7 +42,7 @@
       </div>
 
       <!-- Grid de parceiros -->
-      <div class="grid grid-cols-4 gap-2.5">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5">
         <button
           v-for="parceiro in parceiros"
           :key="parceiro.slug"
