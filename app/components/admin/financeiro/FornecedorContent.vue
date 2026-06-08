@@ -67,7 +67,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Repasse } from '~/composables/admin/useFinanceiro'
+import type { Repasse } from '~/shared/types'
 
 const props = defineProps<{
   repasses: Repasse[]

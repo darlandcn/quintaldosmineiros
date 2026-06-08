@@ -1,14 +1,12 @@
-const CONFIRMED_STATUSES = ['paid', 'shipped']
+import type { ChartPoint } from '~/shared/types'
+import { CONFIRMED_STATUSES } from '~/shared/constants'
+
+
 const DAYS_PT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
 
 function localDateKey(iso: string): string {
   const d = new Date(iso)
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-}
-
-export interface ChartPoint {
-  day: string
-  value: number
 }
 
 export function useSalesChart() {
@@ -26,7 +24,6 @@ export function useSalesChart() {
     try {
       const now = new Date()
 
-      // Build ordered map for the last 7 days (oldest → newest)
       const dayMap = new Map<string, number>()
       for (let i = 6; i >= 0; i--) {
         const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i)
@@ -55,8 +52,8 @@ export function useSalesChart() {
         const d = new Date(key + 'T12:00:00')
         return { day: DAYS_PT[d.getDay()], value }
       })
-    } catch (e: any) {
-      error.value = e?.message ?? 'Erro ao buscar dados do gráfico'
+    } catch (e: unknown) {
+      error.value = (e as Error)?.message ?? 'Erro ao buscar dados do gráfico'
     } finally {
       loading.value = false
     }

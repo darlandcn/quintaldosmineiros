@@ -102,7 +102,7 @@ const searchOpen = ref(false)
 
       <AppTooltip label="Acompanhar pedido" position="below">
         <NuxtLink
-          to="/meus-pedidos"
+          to="/acompanhar-pedido"
           class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200"
           aria-label="Acompanhar pedido"
         >
@@ -154,7 +154,7 @@ const searchOpen = ref(false)
           <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
         </svg>
       </button>
-      <NuxtLink to="/meus-pedidos" class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200" aria-label="Meus pedidos">
+      <NuxtLink to="/acompanhar-pedido" class="p-2 text-white hover:bg-white/15 rounded-lg transition-colors duration-200" aria-label="Meus pedidos">
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 22V12"/><path d="M20.27 18.27 22 20"/><path d="M21 10.498V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.729l7 4a2 2 0 0 0 2 .001l.98-.559"/><path d="M3.29 7 12 12l8.71-5"/><path d="m7.5 4.27 8.997 5.148"/><circle cx="18.5" cy="16.5" r="2.5"/>
         </svg>

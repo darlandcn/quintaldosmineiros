@@ -1,22 +1,6 @@
-// ─── Types ───────────────────────────────────────────────────────────────────
+import type { ProductDetail } from '~/shared/types'
+import { formatBRL } from '~/utils/formatters'
 
-export interface ProductDetail {
-  id: string
-  name: string
-  description: string
-  price: number
-  priceDisplay: string
-  images: string[]
-  stock: number
-}
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function formatBRL(value: number): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-}
-
-// ─── Composable ──────────────────────────────────────────────────────────────
 
 export function useProduct(id: string) {
   const product = ref<ProductDetail | null>(null)
@@ -41,8 +25,8 @@ export function useProduct(id: string) {
         images: Array.isArray(data.images) ? data.images : [],
         priceDisplay: formatBRL(Number(data.price) || 0),
       }
-    } catch (e: any) {
-      error.value = e?.message ?? 'Produto não encontrado'
+    } catch (e: unknown) {
+      error.value = (e as Error)?.message ?? 'Produto não encontrado'
     } finally {
       loading.value = false
     }

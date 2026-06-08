@@ -1,51 +1,8 @@
-// ─── Types ───────────────────────────────────────────────────────────────────
+import type { Customer, CustomerOrder, OrderStatus } from '~/shared/types'
+import { formatDate, formatBRL, shortId } from '~/utils/formatters'
 
-import type { OrderStatus } from './useOrders'
-
-export type { OrderStatus }
-
-export interface CustomerOrder {
-  id: string
-  date: string
-  amount: string
-  status: OrderStatus
-  notes?: string
-}
-
-export interface Customer {
-  key: string
-  name: string
-  email?: string
-  phone?: string
-  address?: string
-  orderCount: number
-  totalSpent: string
-  totalSpentRaw: number
-  lastOrderDate: string
-  lastStatus: OrderStatus
-  orders: CustomerOrder[]
-}
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
-}
-
-function formatBRL(value: number): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-}
-
-function shortId(uuid: string): string {
-  const num = parseInt(uuid.replace(/-/g, '').slice(-8), 16) % 10000
-  return '#' + String(num).padStart(4, '0')
-}
-
-// ─── Composable ──────────────────────────────────────────────────────────────
 
 export function useCustomers() {
-  // ── State ──────────────────────────────────────────────────────────────────
-
   const customers = ref<Customer[]>([])
   const loading = ref(false)
   const fetchError = ref<string | null>(null)
@@ -54,8 +11,6 @@ export function useCustomers() {
 
   const showDrawer = ref(false)
   const selectedCustomer = ref<Customer | null>(null)
-
-  // ── Computed ───────────────────────────────────────────────────────────────
 
   const filteredCustomers = computed(() => {
     const q = searchQuery.value.trim().toLowerCase()
@@ -81,8 +36,6 @@ export function useCustomers() {
     return formatBRL(totalRevenue.value / totalOrders)
   })
 
-  // ── Actions ────────────────────────────────────────────────────────────────
-
   async function fetchCustomers() {
     const supabase = useSupabase()
     loading.value = true
@@ -105,7 +58,7 @@ export function useCustomers() {
           id: shortId(o.id),
           date: formatDate(o.created_at),
           amount: formatBRL(amount),
-          status: (['pending', 'paid', 'shipped', 'cancelled'].includes(o.status) ? o.status : 'pending') as OrderStatus,
+          status: (['pending', 'paid', 'shipped', 'invoiced', 'delivered', 'cancelled'].includes(o.status) ? o.status : 'pending') as OrderStatus,
           notes: o.notes ?? undefined,
         }
 
@@ -126,15 +79,15 @@ export function useCustomers() {
             totalSpentRaw: amount,
             totalSpent: formatBRL(amount),
             lastOrderDate: formatDate(o.created_at),
-            lastStatus: (['pending', 'paid', 'shipped', 'cancelled'].includes(o.status) ? o.status : 'pending') as OrderStatus,
+            lastStatus: (['pending', 'paid', 'shipped', 'invoiced', 'delivered', 'cancelled'].includes(o.status) ? o.status : 'pending') as OrderStatus,
             orders: [order],
           })
         }
       }
 
       customers.value = Array.from(map.values())
-    } catch (e: any) {
-      fetchError.value = e?.message ?? 'Erro ao buscar clientes'
+    } catch (e: unknown) {
+      fetchError.value = (e as Error)?.message ?? 'Erro ao buscar clientes'
     } finally {
       loading.value = false
     }
@@ -155,18 +108,15 @@ export function useCustomers() {
   }
 
   return {
-    // state
     loading,
     fetchError,
     searchQuery,
     showDrawer,
     selectedCustomer,
-    // computed
     filteredCustomers,
     totalRevenue,
     recurringCount,
     averageTicket,
-    // actions
     fetchCustomers,
     openDrawer,
     closeDrawer,

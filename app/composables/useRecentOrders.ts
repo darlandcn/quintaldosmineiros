@@ -1,28 +1,7 @@
 import type { Ref } from 'vue'
+import type { RecentOrder } from '~/shared/types'
+import { formatDate, formatBRL, shortId } from '~/utils/formatters'
 
-type OrderStatus = 'pending' | 'paid' | 'shipped'
-
-export interface RecentOrder {
-  id: string
-  client: string
-  date: string
-  amount: string
-  status: OrderStatus
-}
-
-function formatDate(iso: string): string {
-  const d = new Date(iso)
-  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
-}
-
-function formatBRL(value: number): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-}
-
-function shortId(uuid: string): string {
-  const num = parseInt(uuid.replace(/-/g, '').slice(-8), 16) % 10000
-  return '#' + String(num).padStart(4, '0')
-}
 
 export function useRecentOrders() {
   const supabase = useSupabase()
@@ -50,10 +29,10 @@ export function useRecentOrders() {
         client: o.customer_name ?? '—',
         date: formatDate(o.created_at),
         amount: formatBRL(Number(o.total_price) || 0),
-        status: o.status as OrderStatus,
+        status: o.status as RecentOrder['status'],
       }))
-    } catch (e: any) {
-      error.value = e?.message ?? 'Erro ao buscar pedidos recentes'
+    } catch (e: unknown) {
+      error.value = (e as Error)?.message ?? 'Erro ao buscar pedidos recentes'
     } finally {
       loading.value = false
     }

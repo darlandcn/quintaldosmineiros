@@ -1,80 +1,22 @@
 import { ref, computed } from 'vue'
+import type {
+  ParceiroSlug,
+  Parceiro,
+  BlingPagamento,
+  AppmaxTransacao,
+  LoggiColeta,
+  FornecedorConta,
+  Repasse,
+} from '~/shared/types'
+import { formatBRL } from '~/utils/formatters'
 
-// ─── Types ───────────────────────────────────────────────────────────────────
-
-export type ParceiroSlug = 'bling' | 'appmax' | 'loggi' | 'fornecedor'
-
-export interface Parceiro {
-  slug: ParceiroSlug
-  nome: string
-  categoria: string
-  cor: string
-  corTexto: string
-  sigla: string
-  totalMensal: number
-  status: 'ok' | 'pendente' | 'vencido'
-}
-
-export interface BlingPagamento {
-  mes: string
-  vencimento: string
-  valor: number
-  status: 'pago' | 'pendente' | 'vencido'
-}
-
-export interface AppmaxTransacao {
-  pedidoId: string
-  data: string
-  metodo: 'pix' | 'credito' | 'boleto'
-  parcelas: number
-  valorBruto: number
-  taxaPercentual: number
-  taxaFixa: number
-  valorTaxa: number
-  valorLiquido: number
-}
-
-export interface LoggiColeta {
-  id: string
-  data: string
-  pedidoId: string
-  destino: string
-  status: 'entregue' | 'em_transito' | 'pendente' | 'cancelado'
-  valor: number
-}
-
-export interface FornecedorConta {
-  id: string
-  fornecedor: string
-  descricao: string
-  vencimento: string
-  valor: number
-  status: 'pago' | 'pendente' | 'vencido'
-  observacao?: string
-}
-
-export interface Repasse {
-  pedidoId: string
-  data: string
-  quantidade: number
-  valorBruto: number
-  percentualRepasse: number
-  valorRepasse: number
-  statusPedido: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled'
-}
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function formatBRL(value: number): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-}
 
 export function calcularTaxaAppmax(
   metodo: 'pix' | 'credito' | 'boleto',
   valorBruto: number,
   parcelas = 1,
 ): Pick<AppmaxTransacao, 'taxaPercentual' | 'taxaFixa' | 'valorTaxa' | 'valorLiquido'> {
-  const gateway = 0.99 // R$ 0,99 por transação aprovada (Gateway e Antifraude)
+  const gateway = 0.99
 
   if (metodo === 'pix') {
     const percentual = 1.00
@@ -88,7 +30,6 @@ export function calcularTaxaAppmax(
     return { taxaPercentual: 0, taxaFixa: fixa, valorTaxa: fixa, valorLiquido: valorBruto - fixa }
   }
 
-  // crédito: 4,99% (30 dias) + 2,49% p.p. para parcelas > 1 + gateway
   const percentualBase = 4.99
   const percentualParcelamento = parcelas > 1 ? (parcelas - 1) * 2.49 : 0
   const percentualTotal = percentualBase + percentualParcelamento
@@ -96,8 +37,6 @@ export function calcularTaxaAppmax(
   const valorTaxa = (valorBruto * percentualTotal / 100) + fixa
   return { taxaPercentual: percentualTotal, taxaFixa: fixa, valorTaxa, valorLiquido: valorBruto - valorTaxa }
 }
-
-// ─── Dados de repasse ────────────────────────────────────────────────────────
 
 const PRECO_TORRESMO = 89.90
 const PERCENTUAL_FAZENDA = 24.5
@@ -114,11 +53,7 @@ const fornecedorTotalMensal = repasesData
   .filter(r => r.statusPedido !== 'cancelled')
   .reduce((s, r) => s + r.valorRepasse, 0)
 
-// ─── Composable ──────────────────────────────────────────────────────────────
-
 export function useFinanceiro() {
-  // ── State ──────────────────────────────────────────────────────────────────
-
   const parceiros = ref<Parceiro[]>([
     { slug: 'bling',      nome: 'Bling',       categoria: 'ERP / NF-e',           sigla: 'BLG', cor: 'bg-green-50',  corTexto: 'text-green-700',  totalMensal: 120, status: 'ok'       },
     { slug: 'appmax',     nome: 'AppMax',       categoria: 'Gateway de pagamento',  sigla: 'APX', cor: 'bg-blue-50',   corTexto: 'text-blue-600',   totalMensal: 0,   status: 'pendente' },
@@ -144,66 +79,16 @@ export function useFinanceiro() {
   ])
 
   const loggiColetas = ref<LoggiColeta[]>([
-    {
-      id: 'LGG-001',
-      data: '03/06/2026',
-      pedidoId: '#0142',
-      destino: 'Belo Horizonte, MG – Savassi',
-      status: 'em_transito',
-      valor: 28.50,
-    },
-    {
-      id: 'LGG-002',
-      data: '01/06/2026',
-      pedidoId: '#0138',
-      destino: 'Contagem, MG – Centro',
-      status: 'entregue',
-      valor: 22.90,
-    },
-    {
-      id: 'LGG-003',
-      data: '30/05/2026',
-      pedidoId: '#0135',
-      destino: 'Belo Horizonte, MG – Pampulha',
-      status: 'entregue',
-      valor: 19.80,
-    },
-    {
-      id: 'LGG-004',
-      data: '27/05/2026',
-      pedidoId: '#0131',
-      destino: 'Nova Lima, MG – Vila da Serra',
-      status: 'entregue',
-      valor: 34.70,
-    },
+    { id: 'LGG-001', data: '03/06/2026', pedidoId: '#0142', destino: 'Belo Horizonte, MG – Savassi',      status: 'em_transito', valor: 28.50 },
+    { id: 'LGG-002', data: '01/06/2026', pedidoId: '#0138', destino: 'Contagem, MG – Centro',             status: 'entregue',    valor: 22.90 },
+    { id: 'LGG-003', data: '30/05/2026', pedidoId: '#0135', destino: 'Belo Horizonte, MG – Pampulha',    status: 'entregue',    valor: 19.80 },
+    { id: 'LGG-004', data: '27/05/2026', pedidoId: '#0131', destino: 'Nova Lima, MG – Vila da Serra',    status: 'entregue',    valor: 34.70 },
   ])
 
   const fornecedorContas = ref<FornecedorConta[]>([
-    {
-      id: 'FOR-001',
-      fornecedor: 'Frigorífico São Judas',
-      descricao: 'Porco – lote 40 kg',
-      vencimento: '10/06/2026',
-      valor: 560.00,
-      status: 'pendente',
-    },
-    {
-      id: 'FOR-002',
-      fornecedor: 'Embalagens Minas',
-      descricao: 'Sacolas e embalagens – caixa 500 un.',
-      vencimento: '15/06/2026',
-      valor: 187.50,
-      status: 'pendente',
-    },
-    {
-      id: 'FOR-003',
-      fornecedor: 'Distribuidora Central',
-      descricao: 'Banha de porco – lata 5 kg',
-      vencimento: '05/06/2026',
-      valor: 98.00,
-      status: 'vencido',
-      observacao: 'Contato pendente para renegociação',
-    },
+    { id: 'FOR-001', fornecedor: 'Frigorífico São Judas',  descricao: 'Porco – lote 40 kg',                    vencimento: '10/06/2026', valor: 560.00, status: 'pendente' },
+    { id: 'FOR-002', fornecedor: 'Embalagens Minas',       descricao: 'Sacolas e embalagens – caixa 500 un.',  vencimento: '15/06/2026', valor: 187.50, status: 'pendente' },
+    { id: 'FOR-003', fornecedor: 'Distribuidora Central',  descricao: 'Banha de porco – lata 5 kg',            vencimento: '05/06/2026', valor: 98.00,  status: 'vencido', observacao: 'Contato pendente para renegociação' },
   ])
 
   const repasses = ref<Repasse[]>(repasesData)
@@ -216,8 +101,6 @@ export function useFinanceiro() {
 
   const parceiroAtivo = ref<Parceiro | null>(null)
   const showDrawer = ref(false)
-
-  // ── Computed ───────────────────────────────────────────────────────────────
 
   const totalAPagarMes = computed(() => {
     const bling = blingPagamentos.value
@@ -246,7 +129,6 @@ export function useFinanceiro() {
   })
 
   const proximoVencimento = computed(() => {
-    const hoje = new Date()
     const datas: Date[] = []
 
     for (const c of blingPagamentos.value) {
@@ -272,8 +154,6 @@ export function useFinanceiro() {
   const totalPendentesDisplay = computed(() => String(totalPendentes.value))
   const totalPagoMesDisplay = computed(() => formatBRL(totalPagoMes.value))
 
-  // ── Actions ────────────────────────────────────────────────────────────────
-
   function openDrawer(slug: ParceiroSlug) {
     parceiroAtivo.value = parceiros.value.find(p => p.slug === slug) ?? null
     showDrawer.value = true
@@ -285,7 +165,6 @@ export function useFinanceiro() {
   }
 
   return {
-    // state
     parceiros,
     parceiroAtivo,
     showDrawer,
@@ -294,14 +173,11 @@ export function useFinanceiro() {
     loggiColetas,
     fornecedorContas,
     repasses,
-    // actions (fornecedor)
     statusRepasse,
-    // computed
     totalAPagarMesDisplay,
     totalPendentesDisplay,
     totalPagoMesDisplay,
     proximoVencimento,
-    // actions
     openDrawer,
     closeDrawer,
     calcularTaxaAppmax,

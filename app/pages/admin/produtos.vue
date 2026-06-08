@@ -348,7 +348,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AdminProduct } from '~/composables/useAdminProducts'
+import type { AdminProduct } from '~/shared/types'
 
 definePageMeta({ layout: 'admin' })
 
@@ -428,8 +428,8 @@ async function handleDelete() {
     await deleteProduct(productToDelete.value.id)
     productToDelete.value = null
     await fetchProducts()
-  } catch (e: any) {
-    deleteError.value = e?.message ?? 'Erro ao excluir produto.'
+  } catch (e: unknown) {
+    deleteError.value = (e as Error)?.message ?? 'Erro ao excluir produto.'
   } finally {
     deleting.value = false
   }

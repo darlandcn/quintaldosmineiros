@@ -1,17 +1,7 @@
-// ─── useTestimonials Composable ───
-// Depoimentos reais de clientes para a seção de prova social
+import type { Testimonial } from '~/shared/types'
 
-export interface Testimonial {
-  id: number
-  name: string
-  location: string
-  text: string
-  rating: number
-  occasion?: string
-}
 
 export function useTestimonials() {
-  // ─── Depoimentos dos Clientes ───
   const testimonials: Testimonial[] = [
     {
       id: 1,

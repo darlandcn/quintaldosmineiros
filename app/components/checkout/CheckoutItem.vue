@@ -33,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CartItem } from '~/composables/useCart'
+import type { CartItem } from '~/shared/types'
 
 const props = defineProps<{ item: CartItem }>()
 

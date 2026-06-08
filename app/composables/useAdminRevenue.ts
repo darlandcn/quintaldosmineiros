@@ -1,13 +1,9 @@
-const CONFIRMED_STATUSES = ['paid', 'shipped']
-
-function formatBRL(value: number) {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-}
+import { formatBRL } from '~/utils/formatters'
+import { CONFIRMED_STATUSES } from '~/shared/constants'
 
 export function useAdminRevenue() {
   const supabase = useSupabase()
 
-  // — Receita Total + Ticket Médio (mesma query) —
   const revenue = ref(0)
   const revenueTrend = ref(0)
   const revenueLoading = ref(false)
@@ -70,14 +66,13 @@ export function useAdminRevenue() {
       if (lastMonthAvg > 0) {
         avgTicketTrend.value = Math.round(((thisMonthAvg - lastMonthAvg) / lastMonthAvg) * 1000) / 10
       }
-    } catch (e: any) {
-      revenueError.value = e?.message ?? 'Erro ao buscar receita'
+    } catch (e: unknown) {
+      revenueError.value = (e as Error)?.message ?? 'Erro ao buscar receita'
     } finally {
       revenueLoading.value = false
     }
   }
 
-  // — Vendas Hoje —
   const todaySales = ref(0)
   const todayTrend = ref(0)
   const todayLoading = ref(false)
@@ -121,14 +116,13 @@ export function useAdminRevenue() {
       if (yesterdayTotal > 0) {
         todayTrend.value = Math.round(((todayTotal - yesterdayTotal) / yesterdayTotal) * 1000) / 10
       }
-    } catch (e: any) {
-      todayError.value = e?.message ?? 'Erro ao buscar vendas de hoje'
+    } catch (e: unknown) {
+      todayError.value = (e as Error)?.message ?? 'Erro ao buscar vendas de hoje'
     } finally {
       todayLoading.value = false
     }
   }
 
-  // — Pedidos + Status —
   const thisMonthOrders = ref(0)
   const totalOrdersHistoric = ref(0)
   const totalOrdersTrend = ref(0)
@@ -192,21 +186,17 @@ export function useAdminRevenue() {
       if (lastMonthCount > 0) {
         totalOrdersTrend.value = Math.round(((thisMonthCount - lastMonthCount) / lastMonthCount) * 1000) / 10
       }
-    } catch (e: any) {
-      totalOrdersError.value = e?.message ?? 'Erro ao buscar pedidos'
+    } catch (e: unknown) {
+      totalOrdersError.value = (e as Error)?.message ?? 'Erro ao buscar pedidos'
     } finally {
       totalOrdersLoading.value = false
     }
   }
 
   return {
-    // Receita Total
     revenue, formattedRevenue, revenueTrend, revenueLoading, revenueError, fetchRevenue,
-    // Ticket Médio (calculado na mesma query)
     avgTicket, formattedAvgTicket, avgTicketTrend,
-    // Vendas Hoje
     todaySales, formattedTodaySales, todayTrend, todayLoading, todayError, fetchTodaySales,
-    // Pedidos + Status
     thisMonthOrders, totalOrdersHistoric, totalOrdersTrend, totalOrdersLoading, totalOrdersError,
     orderStatuses, fetchTotalOrders,
   }

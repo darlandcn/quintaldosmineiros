@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { BlingPagamento } from '~/composables/admin/useFinanceiro'
+import type { BlingPagamento } from '~/shared/types'
 
 const props = defineProps<{
   pagamentos: BlingPagamento[]

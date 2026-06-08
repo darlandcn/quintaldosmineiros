@@ -285,13 +285,13 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
           </svg>
-          Finalizando pedido...
+          Aguarde...
         </span>
         <template v-else>
+          Avançar para Pagamento
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
-          Finalizar Pedido
         </template>
       </button>
 
@@ -308,7 +308,7 @@
 
 <script setup lang="ts">
 const emit = defineEmits<{
-  submitted: [data: { nome: string }]
+  submitted: [data: { orderId: string }]
 }>()
 
 const { items, totalPrice } = useCart()
@@ -476,9 +476,9 @@ async function handleSubmit() {
       })
     )
 
-    emit('submitted', { nome: form.nome })
-  } catch (e: any) {
-    errorMessage.value = e?.message ?? 'Erro ao finalizar pedido. Tente novamente.'
+    emit('submitted', { orderId: order.id })
+  } catch (e: unknown) {
+    errorMessage.value = (e as Error)?.message ?? 'Erro ao finalizar pedido. Tente novamente.'
   } finally {
     isSubmitting.value = false
   }

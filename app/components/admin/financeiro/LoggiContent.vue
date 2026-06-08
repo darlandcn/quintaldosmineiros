@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import type { LoggiColeta } from '~/composables/admin/useFinanceiro'
+import type { LoggiColeta } from '~/shared/types'
 
 const props = defineProps<{
   coletas: LoggiColeta[]

@@ -2,7 +2,7 @@
 // ─── BasketCard Component ───
 // Cartão editorial de cesta-presente — foco comercial principal da página
 
-import type { Basket } from '~/composables/useBaskets'
+import type { Basket } from '~/shared/types'
 
 interface Props {
   basket: Basket

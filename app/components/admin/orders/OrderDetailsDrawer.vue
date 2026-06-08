@@ -222,7 +222,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Order, OrderItem, OrderStatus } from '~/composables/admin/useOrders'
+import type { AdminOrder as Order, AdminOrderItem as OrderItem, OrderStatus } from '~/shared/types'
 
 defineProps<{
   showDrawer: boolean

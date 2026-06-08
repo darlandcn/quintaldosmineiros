@@ -1,13 +1,5 @@
-export interface AdminProduct {
-  id: number
-  name: string
-  description: string
-  price: number
-  stock: number
-  images: string[]
-}
+import type { AdminProduct, NewProduct } from '~/shared/types'
 
-export type NewProduct = Omit<AdminProduct, 'id'>
 
 export function useAdminProducts() {
   const products = ref<AdminProduct[]>([])
@@ -30,8 +22,8 @@ export function useAdminProducts() {
       } else {
         products.value = data ?? []
       }
-    } catch (e: any) {
-      error.value = e?.message ?? 'Erro inesperado.'
+    } catch (e: unknown) {
+      error.value = (e as Error)?.message ?? 'Erro inesperado.'
     } finally {
       loading.value = false
     }

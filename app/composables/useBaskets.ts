@@ -1,25 +1,7 @@
-// ─── useBaskets Composable ───
-// Fonte central de dados para todas as cestas de presente da marca
+import type { Basket, BasketItem } from '~/shared/types'
 
-export interface BasketItem {
-  name: string
-  icon: string
-}
-
-export interface Basket {
-  id: number
-  name: string
-  tagline: string
-  description: string
-  price: string
-  image: string
-  items: BasketItem[]
-  highlight?: boolean
-  occasion?: string
-}
 
 export function useBaskets() {
-  // ─── Definição das Cestas ───
   const baskets: Basket[] = [
     {
       id: 1,

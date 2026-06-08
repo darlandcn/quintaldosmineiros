@@ -1,59 +1,15 @@
-// ─── Types ───────────────────────────────────────────────────────────────────
+import type { AdminOrder, AdminOrderItem, AdminOrderDetails, OrderStatus } from '~/shared/types'
+import { formatDate, formatBRL, shortId } from '~/utils/formatters'
 
-export type OrderStatus = 'pending' | 'paid' | 'shipped' | 'cancelled'
 
-export interface OrderItem {
-  name: string
-  image: string
-  qty: number
-  unitPrice: string
-  subtotal: string
+interface OrderItemRow {
+  quantity: number
+  unit_price: number
+  products: { name: string; images: string[] | string }
 }
-
-export interface OrderDetails {
-  phone: string
-  address: { street: string; number: string; city: string; state: string; zip: string }
-  items: OrderItem[]
-  subtotal: string
-  shipping: string
-}
-
-export interface Order {
-  id: string
-  rawId: string
-  client: string
-  date: string
-  amount: string
-  status: OrderStatus
-  email?: string
-  phone?: string
-  address?: string
-  notes?: string
-  payment?: string
-  details?: OrderDetails
-}
-
-// ─── Helpers ─────────────────────────────────────────────────────────────────
-
-function shortId(uuid: string): string {
-  const num = parseInt(uuid.replace(/-/g, '').slice(-8), 16) % 10000
-  return '#' + String(num).padStart(4, '0')
-}
-
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })
-}
-
-function formatBRL(value: number): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-}
-
-// ─── Composable ──────────────────────────────────────────────────────────────
 
 export function useOrders() {
-  // ── State ──────────────────────────────────────────────────────────────────
-
-  const orders = ref<Order[]>([])
+  const orders = ref<AdminOrder[]>([])
   const loading = ref(false)
   const fetchError = ref<string | null>(null)
 
@@ -62,16 +18,14 @@ export function useOrders() {
   const filterDate = ref('')
 
   const showDrawer = ref(false)
-  const selectedOrder = ref<Order | null>(null)
+  const selectedOrder = ref<AdminOrder | null>(null)
   const draftStatus = ref<OrderStatus>('pending')
   const drawerLoading = ref(false)
   const drawerError = ref<string | null>(null)
-  const drawerItems = ref<OrderItem[]>([])
+  const drawerItems = ref<AdminOrderItem[]>([])
   const savingStatus = ref(false)
   const saveError = ref<string | null>(null)
   const saveSuccess = ref(false)
-
-  // ── Computed ───────────────────────────────────────────────────────────────
 
   const filteredOrders = computed(() => {
     return orders.value.filter(order => {
@@ -90,8 +44,6 @@ export function useOrders() {
     })
   })
 
-  // ── Actions ────────────────────────────────────────────────────────────────
-
   async function fetchOrders() {
     const supabase = useSupabase()
     loading.value = true
@@ -108,20 +60,20 @@ export function useOrders() {
         client: o.customer_name ?? '—',
         date: formatDate(o.created_at),
         amount: formatBRL(Number(o.total_price) || 0),
-        status: (['pending', 'paid', 'shipped', 'cancelled'].includes(o.status) ? o.status : 'pending') as OrderStatus,
+        status: (['pending', 'paid', 'shipped', 'invoiced', 'delivered', 'cancelled'].includes(o.status) ? o.status : 'pending') as OrderStatus,
         email: o.customer_email ?? undefined,
         phone: o.customer_phone ?? undefined,
         address: o.customer_address ?? undefined,
         notes: o.notes ?? undefined,
       }))
-    } catch (e: any) {
-      fetchError.value = e?.message ?? 'Erro ao buscar pedidos'
+    } catch (e: unknown) {
+      fetchError.value = (e as Error)?.message ?? 'Erro ao buscar pedidos'
     } finally {
       loading.value = false
     }
   }
 
-  async function openDrawer(order: Order) {
+  async function openDrawer(order: AdminOrder) {
     selectedOrder.value = order
     draftStatus.value = order.status
     drawerItems.value = []
@@ -136,10 +88,10 @@ export function useOrders() {
         .select('quantity, unit_price, products!inner(name, images)')
         .eq('order_id', order.rawId)
       if (err) throw err
-      drawerItems.value = (data ?? []).map((item: any) => {
+      drawerItems.value = ((data ?? []) as unknown as OrderItemRow[]).map((item) => {
         const qty = Number(item.quantity) || 0
         const unitPrice = Number(item.unit_price) || 0
-        const p = item.products as any
+        const p = item.products
         const images = p?.images
         return {
           name: p?.name ?? '—',
@@ -149,8 +101,8 @@ export function useOrders() {
           subtotal: formatBRL(qty * unitPrice),
         }
       })
-    } catch (e: any) {
-      drawerError.value = e?.message ?? 'Erro ao carregar itens do pedido'
+    } catch (e: unknown) {
+      drawerError.value = (e as Error)?.message ?? 'Erro ao carregar itens do pedido'
     } finally {
       drawerLoading.value = false
     }
@@ -180,8 +132,8 @@ export function useOrders() {
       selectedOrder.value = { ...selectedOrder.value, status: draftStatus.value }
       saveSuccess.value = true
       setTimeout(() => { saveSuccess.value = false }, 3000)
-    } catch (e: any) {
-      saveError.value = e?.message ?? 'Erro ao atualizar status'
+    } catch (e: unknown) {
+      saveError.value = (e as Error)?.message ?? 'Erro ao atualizar status'
     } finally {
       savingStatus.value = false
     }
@@ -198,7 +150,6 @@ export function useOrders() {
   }
 
   return {
-    // state
     orders,
     loading,
     fetchError,
@@ -214,9 +165,7 @@ export function useOrders() {
     savingStatus,
     saveError,
     saveSuccess,
-    // computed
     filteredOrders,
-    // actions
     fetchOrders,
     openDrawer,
     closeDrawer,

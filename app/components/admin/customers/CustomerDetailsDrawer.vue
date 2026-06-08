@@ -132,7 +132,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Customer, CustomerOrder } from '~/composables/admin/useCustomers'
+import type { Customer, CustomerOrder } from '~/shared/types'
 
 const props = defineProps<{
   showDrawer: boolean

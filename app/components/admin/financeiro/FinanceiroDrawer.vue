@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { X } from 'lucide-vue-next'
-import type { Parceiro } from '~/composables/admin/useFinanceiro'
+import type { Parceiro } from '~/shared/types'
 
 defineProps<{
   showDrawer: boolean

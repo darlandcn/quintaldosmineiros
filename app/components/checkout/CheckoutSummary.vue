@@ -4,9 +4,6 @@
     <!-- Header -->
     <div class="px-5 py-4 border-b border-[#EDE0CA]/60 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
-        <svg class="w-[18px] h-[18px] text-[#2F5946]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M2.048 18.566A2 2 0 004 21h16a2 2 0 001.952-2.434l-2-9A2 2 0 0018 8H6a2 2 0 00-1.952 1.566zM8 8V6a4 4 0 018 0v2" />
-        </svg>
         <h2 class="font-display text-sm font-semibold text-[#2C1810]">Resumo do pedido</h2>
       </div>
       <span class="font-body text-xs text-[#9A8070]">{{ totalItems }} {{ totalItems === 1 ? 'item' : 'itens' }}</span>

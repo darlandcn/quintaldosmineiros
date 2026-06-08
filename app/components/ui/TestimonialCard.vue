@@ -2,7 +2,7 @@
 // ─── TestimonialCard Component ───
 // Cartão de depoimento elegante com avaliação por estrelas e toque pessoal
 
-import type { Testimonial } from '~/composables/useTestimonials'
+import type { Testimonial } from '~/shared/types'
 
 interface Props {
   testimonial: Testimonial

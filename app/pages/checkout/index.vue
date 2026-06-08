@@ -15,16 +15,16 @@
           Finalizar Pedido
         </span>
 
-        <!-- Voltar ao carrinho -->
-        <NuxtLink
-          to="/"
+        <!-- Voltar -->
+        <button
           class="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-200 font-body text-sm group"
+          @click="router.back()"
         >
           <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
-          Voltar ao carrinho
-        </NuxtLink>
+          Voltar
+        </button>
       </div>
     </div>
 
@@ -77,18 +77,12 @@
 </template>
 
 <script setup lang="ts">
-const { items, clearCart, totalPriceDisplay } = useCart()
+const router = useRouter()
+const { items, clearCart } = useCart()
 
-interface OrderSnapshot {
-  items: typeof items.value
-  totalDisplay: string
-}
-
-function handleOrderSubmitted(data: { nome: string }) {
-  const snapshot = useState<OrderSnapshot | null>('order-snapshot', () => null)
-  snapshot.value = { items: items.value.map(i => ({ ...i })), totalDisplay: totalPriceDisplay.value }
+function handleOrderSubmitted(data: { orderId: string }) {
   clearCart()
-  navigateTo(`/pedido/sucesso?nome=${encodeURIComponent(data.nome.split(' ')[0] ?? data.nome)}`)
+  navigateTo(`/pagamento/${data.orderId}`)
 }
 
 useHead({

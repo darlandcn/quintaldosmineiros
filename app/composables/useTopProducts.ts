@@ -1,14 +1,13 @@
-const CONFIRMED_STATUSES = ['paid', 'shipped']
+import type { TopProduct } from '~/shared/types'
+import { formatBRL } from '~/utils/formatters'
+import { CONFIRMED_STATUSES } from '~/shared/constants'
 
-function formatBRL(value: number): string {
-  return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value)
-}
 
-export interface TopProduct {
-  name: string
-  qty: number
-  revenue: string
-  image: string
+interface OrderItemRow {
+  product_id: string
+  quantity: number
+  unit_price: number
+  products: { name: string; images: string[] | string }
 }
 
 export function useTopProducts() {
@@ -33,10 +32,10 @@ export function useTopProducts() {
 
       const map = new Map<string, { name: string; image: string; qty: number; revenue: number }>()
 
-      for (const item of data ?? []) {
+      for (const item of (data ?? []) as unknown as OrderItemRow[]) {
         const qty = Number(item.quantity) || 0
         const price = Number(item.unit_price) || 0
-        const p = item.products as any
+        const p = item.products
         const name: string = p?.name ?? '—'
         const imgs = p?.images
         const image: string = Array.isArray(imgs) ? (imgs[0] ?? '') : (imgs ?? '')
@@ -54,8 +53,8 @@ export function useTopProducts() {
         .sort((a, b) => b.qty - a.qty)
         .slice(0, 5)
         .map(p => ({ name: p.name, qty: p.qty, revenue: formatBRL(p.revenue), image: p.image }))
-    } catch (e: any) {
-      error.value = e?.message ?? 'Erro ao buscar top produtos'
+    } catch (e: unknown) {
+      error.value = (e as Error)?.message ?? 'Erro ao buscar top produtos'
     } finally {
       loading.value = false
     }

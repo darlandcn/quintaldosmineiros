@@ -69,7 +69,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { AppmaxTransacao } from '~/composables/admin/useFinanceiro'
+import type { AppmaxTransacao } from '~/shared/types'
 
 const props = defineProps<{
   transacoes: AppmaxTransacao[]

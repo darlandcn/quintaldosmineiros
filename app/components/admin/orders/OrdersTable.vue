@@ -130,7 +130,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Order } from '~/composables/admin/useOrders'
+import type { AdminOrder as Order } from '~/shared/types'
 
 defineProps<{
   filteredOrders: Order[]

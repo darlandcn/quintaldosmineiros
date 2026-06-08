@@ -121,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Customer } from '~/composables/admin/useCustomers'
+import type { Customer } from '~/shared/types'
 
 defineProps<{
   filteredCustomers: Customer[]

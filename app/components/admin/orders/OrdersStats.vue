@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Order, OrderStatus } from '~/composables/admin/useOrders'
+import type { AdminOrder as Order, OrderStatus } from '~/shared/types'
 
 defineProps<{
   filteredOrders: Order[]

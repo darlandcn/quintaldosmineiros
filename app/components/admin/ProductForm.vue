@@ -111,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import type { AdminProduct, NewProduct } from '~/composables/useAdminProducts'
+import type { AdminProduct, NewProduct } from '~/shared/types'
 
 const props = defineProps<{
   product?: AdminProduct
@@ -175,8 +175,8 @@ async function submit() {
     }
 
     emit('saved')
-  } catch (e: any) {
-    error.value = e?.message ?? 'Erro ao salvar produto.'
+  } catch (e: unknown) {
+    error.value = (e as Error)?.message ?? 'Erro ao salvar produto.'
   } finally {
     saving.value = false
   }

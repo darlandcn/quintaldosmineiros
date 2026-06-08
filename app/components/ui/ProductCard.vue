@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Product } from '~/composables/useProducts'
+import type { Product } from '~/shared/types'
 
 defineProps<{ product: Product }>()
 </script>

@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import type { OrderStatus } from '~/composables/admin/useOrders'
+import type { OrderStatus } from '~/shared/types'
 
 defineProps<{ status: OrderStatus }>()
 

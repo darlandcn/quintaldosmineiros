@@ -126,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductDetail } from '~/composables/useProduct'
+import type { ProductDetail } from '~/shared/types'
 
 const props = defineProps<{
   modelValue: boolean

@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductDetail } from '~/composables/useProduct'
+import type { ProductDetail } from '~/shared/types'
 
 defineProps<{
   product: ProductDetail

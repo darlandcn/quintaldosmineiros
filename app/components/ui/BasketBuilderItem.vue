@@ -2,7 +2,7 @@
 // ─── BasketBuilderItem Component ───
 // Item selecionável do montador de cestas personalizado
 
-import type { BuilderItem } from '~/composables/useBasketBuilder'
+import type { BuilderItem } from '~/shared/types'
 
 interface Props {
   item: BuilderItem

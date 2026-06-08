@@ -126,7 +126,7 @@ async function submit() {
   try {
     await login(email.value, password.value)
     await navigateTo('/admin')
-  } catch (e: any) {
+  } catch {
     error.value = 'Email ou senha inválidos.'
   } finally {
     loading.value = false
