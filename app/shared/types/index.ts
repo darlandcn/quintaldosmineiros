@@ -23,7 +23,6 @@ export interface AdminOrderItem {
 }
 
 export interface AdminOrderDetails {
-  phone: string
   address: { street: string; number: string; city: string; state: string; zip: string }
   items: AdminOrderItem[]
   subtotal: string
@@ -51,6 +50,8 @@ export interface TrackingOrder {
   id: string
   customer_name: string
   customer_email: string
+  customer_phone?: string
+  customer_document?: string
   total_price: number
   status: OrderStatus
   created_at: string

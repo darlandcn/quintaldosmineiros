@@ -396,7 +396,10 @@
 
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { definePageMeta, useHead, navigateTo } from '#imports'
 import { Zap, FileText, CreditCard, Lock, QrCode } from 'lucide-vue-next'
+import { usePayment } from '~/composables/usePayment'
 
 definePageMeta({ layout: false })
 
@@ -461,7 +464,7 @@ watch(() => state.paymentStatus, async (status) => {
   }
   if (status === 'approved') {
     await new Promise<void>(resolve => setTimeout(resolve, 500))
-    navigateTo('/pedido-sucesso')
+    navigateTo('/pedido/sucesso')
   }
 })
 

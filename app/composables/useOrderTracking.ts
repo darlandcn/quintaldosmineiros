@@ -24,7 +24,7 @@ export function useOrderTracking() {
     try {
       const { data, error: err } = await supabase
         .from('orders')
-        .select('id, customer_name, customer_email, total_price, status, created_at, shipped_at, delivered_at, tracking_code')
+        .select('id, customer_name, customer_email, customer_phone, customer_document, total_price, status, created_at, shipped_at, delivered_at, tracking_code')
         .ilike('customer_email', email)
         .ilike('customer_name', name)
         .order('created_at', { ascending: false })

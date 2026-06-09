@@ -28,22 +28,22 @@
           />
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <!-- Email -->
-          <div>
-            <label class="block font-body text-[11px] font-semibold text-[#6B5649] uppercase tracking-wider mb-1.5" for="email">
-              E-mail
-            </label>
-            <input
-              id="email"
-              v-model="form.email"
-              type="email"
-              placeholder="seu@email.com"
-              required
-              class="w-full px-4 py-3.5 rounded-xl border border-[#D8C9B4] bg-[#FDFAF6] font-body text-sm text-[#2C1810] placeholder-[#C0AA94] hover:border-[#8A7060] focus:outline-none focus:border-[#2F5946] focus:ring-2 focus:ring-[#2F5946]/15 transition-all duration-200"
-            />
-          </div>
+        <!-- Email -->
+        <div>
+          <label class="block font-body text-[11px] font-semibold text-[#6B5649] uppercase tracking-wider mb-1.5" for="email">
+            E-mail
+          </label>
+          <input
+            id="email"
+            v-model="form.email"
+            type="email"
+            placeholder="seu@email.com"
+            required
+            class="w-full px-4 py-3.5 rounded-xl border border-[#D8C9B4] bg-[#FDFAF6] font-body text-sm text-[#2C1810] placeholder-[#C0AA94] hover:border-[#8A7060] focus:outline-none focus:border-[#2F5946] focus:ring-2 focus:ring-[#2F5946]/15 transition-all duration-200"
+          />
+        </div>
 
+        <div class="grid grid-cols-2 gap-4">
           <!-- Telefone -->
           <div>
             <label class="block font-body text-[11px] font-semibold text-[#6B5649] uppercase tracking-wider mb-1.5" for="telefone">
@@ -56,6 +56,24 @@
               placeholder="(00) 00000-0000"
               required
               class="w-full px-4 py-3.5 rounded-xl border border-[#D8C9B4] bg-[#FDFAF6] font-body text-sm text-[#2C1810] placeholder-[#C0AA94] hover:border-[#8A7060] focus:outline-none focus:border-[#2F5946] focus:ring-2 focus:ring-[#2F5946]/15 transition-all duration-200"
+            />
+          </div>
+
+          <!-- CPF -->
+          <div>
+            <label class="block font-body text-[11px] font-semibold text-[#6B5649] uppercase tracking-wider mb-1.5" for="cpf">
+              CPF
+            </label>
+            <input
+              id="cpf"
+              :value="form.cpf"
+              type="text"
+              inputmode="numeric"
+              placeholder="000.000.000-00"
+              maxlength="14"
+              required
+              class="w-full px-4 py-3.5 rounded-xl border border-[#D8C9B4] bg-[#FDFAF6] font-body text-sm text-[#2C1810] placeholder-[#C0AA94] hover:border-[#8A7060] focus:outline-none focus:border-[#2F5946] focus:ring-2 focus:ring-[#2F5946]/15 transition-all duration-200"
+              @input="onCpfInput"
             />
           </div>
         </div>
@@ -307,6 +325,10 @@
 </template>
 
 <script setup lang="ts">
+import { reactive, ref, watch, nextTick } from 'vue'
+import { useCart } from '~/composables/useCart'
+import { useSupabase } from '~/composables/useSupabase'
+
 const emit = defineEmits<{
   submitted: [data: { orderId: string }]
 }>()
@@ -318,6 +340,7 @@ const form = reactive({
   nome: '',
   telefone: '',
   email: '',
+  cpf: '',
   endereco: '',
   observacoes: '',
 })
@@ -356,6 +379,15 @@ function onNomeInput(e: Event) {
   const pos = input.selectionStart
   form.nome = input.value.replace(/(?:^|\s)\S/g, c => c.toUpperCase())
   nextTick(() => input.setSelectionRange(pos, pos))
+}
+
+function onCpfInput(e: Event) {
+  const raw = (e.target as HTMLInputElement).value.replace(/\D/g, '').slice(0, 11)
+  let masked = raw
+  if (raw.length > 9) masked = `${raw.slice(0, 3)}.${raw.slice(3, 6)}.${raw.slice(6, 9)}-${raw.slice(9)}`
+  else if (raw.length > 6) masked = `${raw.slice(0, 3)}.${raw.slice(3, 6)}.${raw.slice(6)}`
+  else if (raw.length > 3) masked = `${raw.slice(0, 3)}.${raw.slice(3)}`
+  form.cpf = masked
 }
 
 function onCepInput(e: Event) {
@@ -440,6 +472,7 @@ async function handleSubmit() {
         customer_name: form.nome,
         customer_email: form.email,
         customer_phone: form.telefone,
+        customer_document: form.cpf.replace(/\D/g, ''),
         customer_address: form.endereco,
         notes: form.observacoes || null,
         total_price: totalPrice.value,

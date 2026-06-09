@@ -249,6 +249,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { definePageMeta, useHead } from '#imports'
+import { useOrderTracking } from '~/composables/useOrderTracking'
 
 definePageMeta({ layout: false })
 
