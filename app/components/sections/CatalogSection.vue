@@ -20,7 +20,7 @@ onMounted(fetchProducts)
       </div>
 
       <!-- ─── Loading ─── -->
-      <div v-if="loading" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div v-if="loading" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         <div
           v-for="i in 8"
           :key="i"
@@ -51,13 +51,18 @@ onMounted(fetchProducts)
 
       <!-- ─── Grade de Produtos ─── -->
       <template v-else>
-        <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <ProductCard
+        <div class="flex flex-wrap justify-center gap-6">
+          <div
             v-for="product in products"
             :key="product.id"
-            :product="product"
-          />
+            class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)]"
+          >
+            <ProductCard :product="product" />
+          </div>
         </div>
+
+        <!-- ─── Mais em breve ─── -->
+        <p class="mt-8 text-center font-body text-sm italic text-[#7A6355]">Mais produtos em breve...</p>
 
         <!-- ─── Estado Vazio ─── -->
         <div v-if="products.length === 0" class="text-center py-20">

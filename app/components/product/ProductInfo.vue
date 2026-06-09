@@ -26,7 +26,7 @@
 
     <!-- Descrição curta + ver mais -->
     <div class="border-t border-[#E7D7BC]/80 pt-5 flex flex-col gap-3">
-      <p class="font-body text-base text-[#3D2B1F]/75 leading-relaxed">
+      <p class="font-body text-base text-[#3D2B1F]/75 leading-relaxed whitespace-pre-wrap">
         {{ product.description }}
       </p>
       <button

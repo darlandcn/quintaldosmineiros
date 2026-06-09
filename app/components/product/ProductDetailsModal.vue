@@ -90,31 +90,22 @@
                 <div class="flex-1 h-px bg-gradient-to-r from-transparent via-[#E7D7BC] to-transparent" />
               </div>
 
-              <!-- ─── Ocasiões ─── -->
+              <!-- ─── FAQ ─── -->
               <div>
                 <p class="font-display font-bold text-base sm:text-lg text-[#2C1810] text-center mb-3">
-                  Perfeito para Todas as Ocasiões:
+                  Perguntas frequentes
                 </p>
 
-                <div class="grid grid-cols-3 gap-2.5">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <div
-                    v-for="occasion in occasions"
-                    :key="occasion.title"
-                    class="flex flex-col items-center gap-1.5 p-3 rounded-xl bg-white/70 border border-[#E7D7BC]/60 text-center"
+                    v-for="faq in faqs"
+                    :key="faq.q"
+                    class="p-3 rounded-xl bg-white/70 border border-[#E7D7BC]/60"
                   >
-                    <div class="w-8 h-8 flex items-center justify-center rounded-full bg-[#F3EBDD] border border-[#E7D7BC]">
-                      <svg class="w-3.5 h-3.5 text-[#2F5946]" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
-                        <path v-for="(d, i) in occasion.paths" :key="i" :d="d" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </div>
-                    <p class="font-body text-[9px] font-bold text-[#2F5946] tracking-widest uppercase">{{ occasion.title }}</p>
-                    <p class="font-body text-[11px] text-[#3D2B1F]/70 leading-snug">{{ occasion.desc }}</p>
+                    <p class="font-body text-xs font-bold text-[#2C1810] mb-1">{{ faq.q }}</p>
+                    <p class="font-body text-[11px] text-[#3D2B1F]/70 leading-relaxed">{{ faq.a }}</p>
                   </div>
                 </div>
-
-                <p class="mt-3 font-body text-[10px] text-[#7A6355] text-center">
-                  Snack naturalmente <strong class="font-semibold text-[#3D2B1F]">rico em creatina e proteínas</strong>, em especial o colágeno
-                </p>
               </div>
 
             </div>
@@ -158,21 +149,18 @@ const benefits = [
   },
 ]
 
-const occasions = [
+const faqs = [
   {
-    title: 'Tira-Gosto',
-    desc: 'Ideal para a cerveja com os amigos.',
-    paths: ['M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z'],
+    q: 'Como preparo?',
+    a: 'Aqueça uma panela em fogo médio, despeje o conteúdo e mexa por cerca de 5 minutos até atingir a pururuca dourada. Sem óleo, sem complicação.',
   },
   {
-    title: 'Toque Crocante',
-    desc: 'Em caldos e no feijão tropeiro.',
-    paths: ['M12 6v6m0 0v6m0-6h6m-6 0H6', 'M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
+    q: 'Precisa de geladeira?',
+    a: 'Antes de abrir, não — fica tranquilo na despensa em temperatura ambiente. Depois de aberto, conserve na geladeira.',
   },
   {
-    title: 'Snack Proteico',
-    desc: 'Para qualquer hora do dia.',
-    paths: ['M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z', 'M16 3h-8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z', 'M8 13h.01M12 13h.01M16 13h.01'],
+    q: 'Qual a validade do produto?',
+    a: 'Nossos lotes têm validade de 6 meses (fechados). Após aberto, recomendamos o consumo imediato para garantir a máxima crocância.',
   },
 ]
 

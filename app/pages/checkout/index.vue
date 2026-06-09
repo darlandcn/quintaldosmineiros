@@ -1,32 +1,7 @@
 <template>
   <div class="min-h-screen bg-[#F5EFE6]">
 
-    <!-- Header -->
-    <div class="bg-[#2F5946] sticky top-0 z-10 shadow-[0_2px_20px_rgba(44,24,16,0.2)]">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <!-- Logos -->
-        <NuxtLink to="/" class="flex items-center gap-0">
-          <img src="/images/logo_passarinho_2.png" alt="" class="h-10 w-auto" />
-          <img src="/images/logo_nome_2.png" alt="Quintal dos Mineiros" class="h-9 w-auto" />
-        </NuxtLink>
-
-        <!-- Título centralizado -->
-        <span class="absolute left-1/2 -translate-x-1/2 font-display text-base font-semibold text-white">
-          Finalizar Pedido
-        </span>
-
-        <!-- Voltar -->
-        <button
-          class="flex items-center gap-2 text-white/70 hover:text-white transition-colors duration-200 font-body text-sm group"
-          @click="router.back()"
-        >
-          <svg class="w-4 h-4 transition-transform duration-200 group-hover:-translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-          Voltar
-        </button>
-      </div>
-    </div>
+    <CheckoutHeader title="Finalizar Pedido" @back="router.back()" />
 
     <!-- Carrinho vazio -->
     <div v-if="items.length === 0" class="flex flex-col items-center justify-center min-h-[70vh] px-4 text-center">

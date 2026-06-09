@@ -18,18 +18,19 @@ const highlights = [
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
         <!-- ─── Coluna de Texto ─── -->
-        <div class="order-2 lg:order-1">
+        <div class="order-1 lg:order-1">
 
           <!-- Eyebrow -->
-          <div class="flex items-center gap-3 mb-6">
-            <div class="h-px w-8 bg-[#2F5946]/60" aria-hidden="true" />
-            <span class="font-body text-xs font-semibold tracking-[0.2em] uppercase text-[#2F5946]">
+          <div class="flex items-center justify-center lg:justify-start gap-3 mb-6">
+            <div class="h-px w-8 flex-shrink-0 bg-[#2F5946]/60" aria-hidden="true" />
+            <span class="font-body text-xs font-semibold tracking-[0.2em] uppercase whitespace-nowrap text-[#2F5946]">
               Nossa História
             </span>
+            <div class="h-px w-8 flex-shrink-0 bg-[#2F5946]/60" aria-hidden="true" />
           </div>
 
           <!-- Headline -->
-          <h2 class="font-display font-semibold text-[#2C1810] text-3xl md:text-4xl lg:text-[2.6rem] leading-tight mb-6">
+          <h2 class="font-display font-semibold text-[#2C1810] text-3xl md:text-4xl lg:text-[2.6rem] leading-tight mb-6 text-center lg:text-left">
             Sabores que carregam histórias.
           </h2>
 
@@ -75,14 +76,14 @@ const highlights = [
           <!-- CTA textual -->
           <a
             href="#produtos"
-            class="font-body text-sm font-semibold text-[#2F5946] hover:text-[#254637] transition-colors duration-200 inline-flex items-center gap-1"
+            class="font-body text-sm font-semibold text-[#2F5946] hover:text-[#254637] transition-colors duration-200 inline-flex items-center gap-1 w-full justify-center lg:w-auto lg:justify-start"
           >
             Explorar nossa curadoria →
           </a>
         </div>
 
         <!-- ─── Coluna de Imagem Editorial ─── -->
-        <div class="order-1 lg:order-2 relative">
+        <div class="order-2 lg:order-2 relative">
 
           <!-- Imagem principal -->
           <div class="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-2xl scale-[1.12]">

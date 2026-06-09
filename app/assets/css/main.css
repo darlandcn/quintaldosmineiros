@@ -80,6 +80,10 @@ body {
   background: linear-gradient(135deg, #FAF6EE 0%, #F3EBDD 100%);
 }
 
+/* ─── Scrollbar oculta (utilitário) ─── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* ─── Scrollbar Personalizada (navegadores WebKit) ─── */
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: #FAF6EE; }

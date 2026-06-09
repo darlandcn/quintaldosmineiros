@@ -1,5 +1,11 @@
 <template>
-  <form class="space-y-4" @submit.prevent="submit">
+  <form
+    class="space-y-4"
+    @submit.prevent="submit"
+    @dragover.prevent="isDragging = true"
+    @dragleave.prevent="isDragging = false"
+    @drop.prevent="onDrop"
+  >
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       <div class="sm:col-span-2">
         <label class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
@@ -45,46 +51,76 @@
         />
       </div>
 
+      <!-- ─── Imagens ─── -->
       <div class="sm:col-span-2">
-        <label class="block text-sm font-medium text-gray-700 mb-1">Imagem</label>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Imagens</label>
 
         <input
           ref="fileInput"
           type="file"
           accept="image/*"
+          multiple
           class="hidden"
           @change="onFileChange"
         />
 
-        <!-- Preview -->
-        <div v-if="previewUrl" class="relative mb-3 w-full h-48 rounded-lg overflow-hidden border border-gray-200 group">
-          <img :src="previewUrl" class="w-full h-full object-cover" alt="preview" />
+        <div
+          class="grid grid-cols-3 gap-2 transition-all"
+          :class="isDragging ? 'ring-2 ring-gray-400 ring-offset-2 rounded-lg' : ''"
+        >
+          <!-- Thumbs existentes -->
+          <div
+            v-for="(item, i) in imageItems"
+            :key="i"
+            class="relative aspect-square rounded-lg border border-gray-200 bg-gray-50 overflow-hidden"
+          >
+            <img :src="getThumbUrl(item)" class="w-full h-full object-cover" alt="" />
+
+            <!-- Overlay de loading para arquivos novos -->
+            <div
+              v-if="typeof item !== 'string'"
+              class="absolute inset-0 flex items-center justify-center bg-black/30"
+            >
+              <svg class="w-5 h-5 text-white animate-spin" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" />
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+              </svg>
+            </div>
+
+            <!-- Badge Principal -->
+            <span
+              v-if="i === 0"
+              class="absolute bottom-1 left-1 bg-green-500 text-white text-[10px] font-semibold px-1.5 py-0.5 rounded leading-none"
+            >
+              Principal
+            </span>
+
+            <!-- Botão remover -->
+            <button
+              type="button"
+              class="absolute top-1 right-1 w-5 h-5 flex items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+              @click="removeImage(i)"
+            >
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Botão adicionar -->
           <button
+            v-if="imageItems.length < 6"
             type="button"
-            class="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity text-white text-sm font-medium"
+            class="aspect-square rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center gap-1 transition-colors"
+            :class="imageItems.length >= 6 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100 hover:border-gray-400'"
+            :disabled="imageItems.length >= 6"
             @click="fileInput?.click()"
           >
-            Trocar imagem
+            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+            </svg>
+            <span class="text-[11px] text-gray-400 font-medium">Adicionar foto</span>
           </button>
-        </div>
-
-        <!-- Dropzone -->
-        <div
-          v-else
-          class="flex flex-col items-center justify-center w-full h-36 rounded-lg border-2 border-dashed transition-colors cursor-pointer"
-          :class="isDragging ? 'border-gray-500 bg-gray-100' : 'border-gray-300 bg-gray-50 hover:bg-gray-100'"
-          @click="fileInput?.click()"
-          @dragover.prevent="isDragging = true"
-          @dragleave.prevent="isDragging = false"
-          @drop.prevent="onDrop"
-        >
-          <svg class="w-8 h-8 text-gray-400 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
-          </svg>
-          <p class="text-sm text-gray-500">
-            {{ isDragging ? 'Solte a imagem aqui' : 'Arraste ou clique para selecionar' }}
-          </p>
-          <p class="text-xs text-gray-400 mt-1">PNG, JPG, WEBP</p>
         </div>
       </div>
     </div>
@@ -128,8 +164,8 @@ const saving = ref(false)
 const error = ref('')
 const isDragging = ref(false)
 const fileInput = ref<HTMLInputElement | null>(null)
-const selectedFile = ref<File | null>(null)
-const previewUrl = ref<string>(props.product?.images?.[0] ?? '')
+
+const imageItems = ref<(string | File)[]>(props.product?.images ?? [])
 
 const form = reactive<NewProduct>({
   name: props.product?.name ?? '',
@@ -143,30 +179,45 @@ function capitalizeFirst(val: string) {
   return val ? val.charAt(0).toUpperCase() + val.slice(1) : val
 }
 
-function setFile(file: File) {
-  selectedFile.value = file
-  previewUrl.value = URL.createObjectURL(file)
+function getThumbUrl(item: string | File): string {
+  return typeof item === 'string' ? item : URL.createObjectURL(item)
+}
+
+function removeImage(index: number) {
+  imageItems.value.splice(index, 1)
+}
+
+function onFilesSelected(files: FileList | null) {
+  if (!files) return
+  const remaining = 6 - imageItems.value.length
+  const toAdd = Array.from(files).slice(0, remaining)
+  imageItems.value.push(...toAdd)
 }
 
 function onFileChange(e: Event) {
-  const file = (e.target as HTMLInputElement).files?.[0]
-  if (file) setFile(file)
+  onFilesSelected((e.target as HTMLInputElement).files)
+  if (fileInput.value) fileInput.value.value = ''
 }
 
 function onDrop(e: DragEvent) {
   isDragging.value = false
-  const file = e.dataTransfer?.files?.[0]
-  if (file && file.type.startsWith('image/')) setFile(file)
+  onFilesSelected(e.dataTransfer?.files ?? null)
 }
 
 async function submit() {
   saving.value = true
   error.value = ''
   try {
-    if (selectedFile.value) {
-      const url = await uploadImage(selectedFile.value)
-      form.images = [url]
+    const finalImages: string[] = []
+    for (const item of imageItems.value) {
+      if (typeof item === 'string') {
+        finalImages.push(item)
+      } else {
+        const url = await uploadImage(item)
+        finalImages.push(url)
+      }
     }
+    form.images = finalImages
 
     if (props.product) {
       await updateProduct(props.product.id, { ...form })

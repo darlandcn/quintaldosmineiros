@@ -82,6 +82,9 @@
             />
           </div>
 
+          <!-- ─── Mais em breve ─── -->
+          <p class="mt-8 text-center font-body text-sm italic text-[#7A6355]">Mais produtos em breve...</p>
+
           <!-- Ver todos -->
           <div class="mt-12 text-center">
             <NuxtLink
