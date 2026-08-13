@@ -182,6 +182,6 @@ function addToCart() {
 }
 
 function buyNow() {
-  redirectToCheckout()
+  redirectToCheckout(qty.value)
 }
 </script>

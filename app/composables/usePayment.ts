@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
 import { $fetch } from 'ofetch'
 import type { TrackingOrder, PaymentMethod } from '~/shared/types'
-import { CARTPANDA_CHECKOUT_URL } from '~/shared/constants'
+import { getCartpandaCheckoutUrl } from '~/shared/constants'
 
 declare global {
   interface Window {
@@ -255,8 +255,8 @@ export function usePayment() {
     await navigator.clipboard.writeText(text)
   }
 
-  function redirectToCheckout(): void {
-    window.location.href = CARTPANDA_CHECKOUT_URL
+  function redirectToCheckout(quantity: number = 1): void {
+    window.location.href = getCartpandaCheckoutUrl(quantity)
   }
 
   return {
