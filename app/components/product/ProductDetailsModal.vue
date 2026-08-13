@@ -26,7 +26,7 @@
           appear
         >
           <div
-            v-if="modelValue"
+            v-if="modelValue && content"
             role="dialog"
             aria-modal="true"
             :aria-label="product?.name"
@@ -51,21 +51,21 @@
                 <!-- Título -->
                 <div class="flex flex-col justify-center gap-2">
                   <p class="font-body text-[9px] font-semibold text-[#2F5946] tracking-[0.18em] uppercase">
-                    Quintal dos Mineiros · Curadoria Especial
+                    {{ content.eyebrow }}
                   </p>
                   <h2 class="font-display font-bold text-xl sm:text-2xl lg:text-3xl text-[#2C1810] leading-[1.15]">
-                    Torresmo Crocante em 5 Minutos.<br>
-                    <span class="text-[#8C3B2A]">Sem Estouros. Sem Sujeira.</span>
+                    <template v-for="line in content.titleLines" :key="line">{{ line }}<br></template>
+                    <span class="text-[#8C3B2A]">{{ content.highlight }}</span>
                   </h2>
                   <p class="font-body text-xs text-[#3D2B1F]/80 leading-relaxed">
-                    A crocância de Minas na sua casa com a praticidade que faltava. Você só faz a melhor parte: a pururuca perfeita, com total segurança.
+                    {{ content.description }}
                   </p>
                 </div>
 
                 <!-- Benefícios -->
                 <div class="flex flex-col gap-2 justify-center">
                   <div
-                    v-for="benefit in benefits"
+                    v-for="benefit in content.benefits"
                     :key="benefit.title"
                     class="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#F3EBDD]/60 border border-[#E7D7BC]/50"
                   >
@@ -98,7 +98,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <div
-                    v-for="faq in faqs"
+                    v-for="faq in content.faqs"
                     :key="faq.q"
                     class="p-3 rounded-xl bg-white/70 border border-[#E7D7BC]/60"
                   >
@@ -118,6 +118,7 @@
 
 <script setup lang="ts">
 import type { ProductDetail } from '~/shared/types'
+import { getProductDetailContent } from '~/utils/productDetails'
 
 const props = defineProps<{
   modelValue: boolean
@@ -128,41 +129,7 @@ const emit = defineEmits<{
   'update:modelValue': [value: boolean]
 }>()
 
-const benefits = [
-  {
-    title: '5 Minutos e Tá na Mesa:',
-    desc: 'É só levar à panela. Incrivelmente rápido.',
-    circle: true,
-    paths: ['M12 6v6l4 2'],
-  },
-  {
-    title: 'Sua Cozinha Fica Limpa:',
-    desc: 'Sem fumaça, sem respingos. É quase mágica.',
-    circle: false,
-    paths: ['M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18'],
-  },
-  {
-    title: 'Sempre à Mão na Despensa:',
-    desc: 'Não precisa de geladeira. É a sua arma secreta.',
-    circle: false,
-    paths: ['M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z', 'M16 3h-8a2 2 0 00-2 2v2h12V5a2 2 0 00-2-2z'],
-  },
-]
-
-const faqs = [
-  {
-    q: 'Como preparo?',
-    a: 'Aqueça uma panela em fogo médio, despeje o conteúdo e mexa por cerca de 5 minutos até atingir a pururuca dourada. Sem óleo, sem complicação.',
-  },
-  {
-    q: 'Precisa de geladeira?',
-    a: 'Antes de abrir, não — fica tranquilo na despensa em temperatura ambiente. Depois de aberto, conserve na geladeira.',
-  },
-  {
-    q: 'Qual a validade do produto?',
-    a: 'Nossos lotes têm validade de 6 meses (fechados). Após aberto, recomendamos o consumo imediato para garantir a máxima crocância.',
-  },
-]
+const content = computed(() => props.product ? getProductDetailContent(props.product.name) : undefined)
 
 function close() {
   emit('update:modelValue', false)

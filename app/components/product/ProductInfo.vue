@@ -30,6 +30,7 @@
         {{ product.description }}
       </p>
       <button
+        v-if="hasDetails"
         class="group self-start font-body text-sm text-[#2F5946] relative"
         @click="$emit('open-details')"
       >
@@ -43,12 +44,15 @@
 
 <script setup lang="ts">
 import type { ProductDetail } from '~/shared/types'
+import { getProductDetailContent } from '~/utils/productDetails'
 
-defineProps<{
+const props = defineProps<{
   product: ProductDetail
 }>()
 
 defineEmits<{
   'open-details': []
 }>()
+
+const hasDetails = computed(() => !!getProductDetailContent(props.product.name))
 </script>
