@@ -82,6 +82,14 @@
       </button>
     </div>
 
+    <!-- Erro de checkout -->
+    <div v-if="checkoutError" class="flex items-center gap-3 py-3.5 px-4 bg-red-50 border border-red-200 rounded-xl">
+      <svg class="w-4 h-4 text-red-500 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+      </svg>
+      <p class="font-body text-sm text-red-600">{{ checkoutError }}</p>
+    </div>
+
     <!-- Diferenciais com SVG -->
     <div class="grid grid-cols-2 gap-3 border-t border-[#E7D7BC] pt-5">
 
@@ -153,6 +161,7 @@ const props = defineProps<{
 const qty = ref(1)
 const { addItem } = useCart()
 const { redirectToCheckout } = usePayment()
+const checkoutError = ref<string | null>(null)
 
 const outOfStock = computed(() => props.product.stock <= 0)
 
@@ -182,6 +191,12 @@ function addToCart() {
 }
 
 function buyNow() {
-  redirectToCheckout(qty.value)
+  if (!props.product.cartpanda_variant_id) {
+    console.error('Produto sem cartpanda_variant_id configurado')
+    checkoutError.value = 'Este produto ainda não está disponível para compra. Tente novamente mais tarde.'
+    return
+  }
+  checkoutError.value = null
+  redirectToCheckout(props.product.cartpanda_variant_id, qty.value)
 }
 </script>

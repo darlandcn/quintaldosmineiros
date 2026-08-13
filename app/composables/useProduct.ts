@@ -14,7 +14,7 @@ export function useProduct(id: string) {
     try {
       const { data, error: err } = await supabase
         .from('products')
-        .select('id, name, description, price, stock, images')
+        .select('id, name, description, price, stock, images, cartpanda_variant_id')
         .eq('id', id)
         .single()
 

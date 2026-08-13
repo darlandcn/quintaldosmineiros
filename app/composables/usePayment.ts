@@ -255,8 +255,8 @@ export function usePayment() {
     await navigator.clipboard.writeText(text)
   }
 
-  function redirectToCheckout(quantity: number = 1): void {
-    window.location.href = getCartpandaCheckoutUrl(quantity)
+  function redirectToCheckout(variantId: string | number, quantity: number = 1): void {
+    window.location.href = getCartpandaCheckoutUrl(variantId, quantity)
   }
 
   return {

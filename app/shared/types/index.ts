@@ -97,6 +97,7 @@ export interface ProductDetail {
   priceDisplay: string
   images: string[]
   stock: number
+  cartpanda_variant_id: string | null
 }
 
 export interface AdminProduct {
