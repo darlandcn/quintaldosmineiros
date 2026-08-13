@@ -47,7 +47,7 @@
     <!-- Botões de ação -->
     <div class="flex flex-col sm:flex-row gap-3 pt-1">
 
-      <!-- Adicionar ao Carrinho -->
+      <!-- Comprar Agora -->
       <button
         class="flex-1 flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl
                font-body font-semibold text-sm tracking-wide transition-all duration-300
@@ -56,16 +56,15 @@
                disabled:bg-[#2F5946]/30 disabled:shadow-none disabled:cursor-not-allowed
                hover:enabled:bg-[#254637] hover:enabled:shadow-[0_6px_28px_rgba(47,89,70,0.32)] hover:enabled:-translate-y-px active:translate-y-0"
         :disabled="outOfStock"
-        @click="addToCart"
+        @click="buyNow"
       >
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2.048 18.566A2 2 0 004 21h16a2 2 0 001.952-2.434l-2-9A2 2 0 0018 8H6a2 2 0 00-1.952 1.566z"/>
-          <path d="M8 11V6a4 4 0 018 0v5"/>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
-        Adicionar ao Carrinho
+        Comprar Agora
       </button>
 
-      <!-- Comprar Agora -->
+      <!-- Adicionar ao Carrinho -->
       <button
         class="flex-1 flex items-center justify-center gap-2.5 px-6 py-4 rounded-xl
                font-body font-semibold text-sm tracking-wide transition-all duration-300
@@ -73,12 +72,13 @@
                disabled:border-[#2F5946]/30 disabled:text-[#2F5946]/30 disabled:cursor-not-allowed
                hover:enabled:bg-[#2F5946]/5 hover:enabled:-translate-y-px active:translate-y-0"
         :disabled="outOfStock"
-        @click="buyNow"
+        @click="addToCart"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2.048 18.566A2 2 0 004 21h16a2 2 0 001.952-2.434l-2-9A2 2 0 0018 8H6a2 2 0 00-1.952 1.566z"/>
+          <path d="M8 11V6a4 4 0 018 0v5"/>
         </svg>
-        Comprar Agora
+        Adicionar ao Carrinho
       </button>
     </div>
 
@@ -144,6 +144,7 @@
 
 <script setup lang="ts">
 import type { ProductDetail } from '~/shared/types'
+import { usePayment } from '~/composables/usePayment'
 
 const props = defineProps<{
   product: ProductDetail
@@ -151,6 +152,7 @@ const props = defineProps<{
 
 const qty = ref(1)
 const { addItem } = useCart()
+const { redirectToCheckout } = usePayment()
 
 const outOfStock = computed(() => props.product.stock <= 0)
 
@@ -180,7 +182,6 @@ function addToCart() {
 }
 
 function buyNow() {
-  addToCart()
-  navigateTo('/checkout')
+  redirectToCheckout()
 }
 </script>

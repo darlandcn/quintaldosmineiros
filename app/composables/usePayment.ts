@@ -1,6 +1,7 @@
 import { reactive } from 'vue'
 import { $fetch } from 'ofetch'
 import type { TrackingOrder, PaymentMethod } from '~/shared/types'
+import { CARTPANDA_CHECKOUT_URL } from '~/shared/constants'
 
 declare global {
   interface Window {
@@ -254,6 +255,10 @@ export function usePayment() {
     await navigator.clipboard.writeText(text)
   }
 
+  function redirectToCheckout(): void {
+    window.location.href = CARTPANDA_CHECKOUT_URL
+  }
+
   return {
     state,
     loadOrder,
@@ -262,5 +267,6 @@ export function usePayment() {
     generateBoleto,
     submitCreditCard,
     copyToClipboard,
+    redirectToCheckout,
   }
 }

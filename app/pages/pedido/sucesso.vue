@@ -32,7 +32,7 @@
 
         <!-- Headline -->
         <h1 class="font-display text-3xl sm:text-4xl font-bold text-[#2C1810] leading-tight mb-4">
-          Pedido recebido<br />com sucesso
+          Pedido realizado<br />com sucesso!
         </h1>
 
         <!-- Saudação personalizada -->
@@ -41,7 +41,7 @@
         </p>
 
         <p class="font-body text-[#7A6355] text-base leading-relaxed max-w-sm mx-auto">
-          Recebemos seu pedido e em breve entraremos em contato pelo WhatsApp para confirmar os detalhes da entrega.
+          Você vai receber um e-mail de confirmação em instantes com todos os detalhes do pagamento. Nossos produtos são artesanais e feitos sob encomenda — o prazo de entrega será informado em seguida.
         </p>
       </div>
 
@@ -226,13 +226,13 @@
       <!-- ─── CTAs ─── -->
       <div class="space-y-3">
         <NuxtLink
-          to="/#produtos"
+          to="/"
           class="inline-flex items-center justify-center gap-2 w-full py-4
                  bg-[#2F5946] hover:bg-[#254637] text-white
                  font-body text-sm font-semibold rounded-xl
                  transition-all duration-300 shadow-md hover:shadow-lg"
         >
-          Continuar comprando
+          Voltar para o início
         </NuxtLink>
 
         <a
@@ -281,7 +281,7 @@ const snapshot = useState<OrderSnapshot | null>('order-snapshot', () => null)
 
 const steps = [
   { label: 'Pedido recebido',      sub: 'Registrado com sucesso',    done: true  },
-  { label: 'Confirmação',          sub: 'Contato via WhatsApp',      done: false },
+  { label: 'Confirmação',          sub: 'E-mail de confirmação',     done: false },
   { label: 'Preparação',           sub: 'Produção artesanal',        done: false },
   { label: 'Entrega',              sub: 'Combinada com você',        done: false },
 ]
