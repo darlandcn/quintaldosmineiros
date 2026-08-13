@@ -107,6 +107,7 @@ export interface AdminProduct {
   price: number
   stock: number
   images: string[]
+  cartpanda_variant_id?: string | null
 }
 
 export type NewProduct = Omit<AdminProduct, 'id'>

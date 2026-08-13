@@ -51,6 +51,17 @@
         />
       </div>
 
+      <div class="sm:col-span-2">
+        <label class="block text-sm font-medium text-gray-700 mb-1">Cartpanda Variant ID</label>
+        <input
+          v-model="form.cartpanda_variant_id"
+          type="text"
+          placeholder="Ex: 205687497"
+          class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400"
+        />
+        <p class="text-xs text-gray-400 mt-1">Encontre o variant_id no painel do Cartpanda → Produtos</p>
+      </div>
+
       <!-- ─── Imagens ─── -->
       <div class="sm:col-span-2">
         <label class="block text-sm font-medium text-gray-700 mb-2">Imagens</label>
@@ -173,6 +184,7 @@ const form = reactive<NewProduct>({
   price: props.product?.price ?? 0,
   stock: props.product?.stock ?? 0,
   images: props.product?.images ?? [],
+  cartpanda_variant_id: props.product?.cartpanda_variant_id ?? '',
 })
 
 function capitalizeFirst(val: string) {
@@ -218,6 +230,7 @@ async function submit() {
       }
     }
     form.images = finalImages
+    form.cartpanda_variant_id = form.cartpanda_variant_id?.trim() || null
 
     if (props.product) {
       await updateProduct(props.product.id, { ...form })
